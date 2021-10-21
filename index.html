@@ -1,103 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css" integrity="sha512-IgmDkwzs96t4SrChW29No3NXBIBv8baW490zk5aXvhCD8vuZM3yUSkbyTBcXohkySecyzIrUwiF/qV0cuPcL3Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Project 1</title> <!-- Name still up for debate -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css"
+    integrity="sha512-IgmDkwzs96t4SrChW29No3NXBIBv8baW490zk5aXvhCD8vuZM3yUSkbyTBcXohkySecyzIrUwiF/qV0cuPcL3Q=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <title>Project 1</title> <!-- Name still up for debate -->
 </head>
+
 <body>
-    <nav class="navbar navbar-light bg-light mb-5">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            <img src="./assets/images/navbar.png" alt="" width="30" height="24" class="d-inline-block fs-3 align-text-top">
-            Save2Fly
+  <nav class="navbar is-transparent">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">
+        <img src="./assets/images/navbar.png" alt="" width="30" height="24" class="d-inline-block fs-3 align-text-top">
+      </a>
+      <h1 class="navbar-item title">Save2Fly</h1>
+      <div class="navbar-burger" data-target="navbarExampleTransparentExample">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <div id="navbarExampleTransparentExample" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="https://bulma.io/">
+          Home
+        </a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="https://bulma.io/documentation/overview/start/">
+            Docs
           </a>
+          <div class="navbar-dropdown is-boxed">
+            <a class="navbar-item" href="https://bulma.io/documentation/overview/start/">
+              Overview
+            </a>
+            <a class="navbar-item" href="https://bulma.io/documentation/overview/modifiers/">
+              Modifiers
+            </a>
+            <a class="navbar-item" href="https://bulma.io/documentation/columns/basics/">
+              Columns
+            </a>
+            <a class="navbar-item" href="https://bulma.io/documentation/layout/container/">
+              Layout
+            </a>
+            <a class="navbar-item" href="https://bulma.io/documentation/form/general/">
+              Form
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" href="https://bulma.io/documentation/elements/box/">
+              Elements
+            </a>
+            <a class="navbar-item is-active" href="https://bulma.io/documentation/components/breadcrumb/">
+              Components
+            </a>
+          </div>
         </div>
-      </nav>
-      <main>
-          <section class='columns' id="input-section">
-              <div id='location-input' class="card column">
-                <h3 class='title'>Where Would You Like To Go?</h3>
-                <div class="">
-                    <input class="input mb-5 is-success" type="text" placeholder="Warning input">
-                    <button class="button is-dark">Dark</button>
-                </div>
-              </div>
-              <div id='budget-input' class="card column">
-                <h3 class='title'>How Much You Got?</h3>
-                <label for="entire-budget">What's your entire budget?</label>
-                <input class="input mb-5 is-success is-three-quarters" name='entire-budget' type="text" placeholder="Flight, food, activities and all...">
-                <input class="input mb-5 is-success is-three-quarters" type="text" placeholder="Warning input">
-                <button class="button is-dark is-one-quarter">Dark</button>
-              </div>
-          </section>
-          <section class='columns' id='location-section'>
-            <div class="card column">
-                <div class="card-content">
-                  <div class="media">
-                    <div class="media-left">
-                      <figure class="image is-48x48">
-                        <img src="./assets/images/navbar.png" alt="Placeholder image">
-                      </figure>
-                    </div>
-                    <div class="media-content">
-                      <p class="title is-4">Location Name</p>
-                    </div>
-                  </div>
-              
-                  <div class="content">
-                    <h4>Price of Flight</h4>
-                    <h4>Currency Conversion:</h4>
-        
-                  </div>
-                </div>
-              </div>
+      </div>
 
-              <div class="card column">
-                <div class="card-content">
-                  <div class="media">
-                    <div class="media-left">
-                      <figure class="image is-48x48">
-                        <img src="assets/images/navbar.png" alt="Placeholder image">
-                      </figure>
-                    </div>
-                    <div class="media-content">
-                      <p class="title is-4">Location Name</p>
-                    </div>
-                  </div>
-              
-                  <div class="content">
-                    <h4>Price of Flight:</h4>
-                    <h4>Currency Conversion:</h4>
-        
-                  </div>
-                </div>
-              </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="field is-grouped">
+            <p class="control">
+              <a class="bd-tw-button button" data-social-network="Twitter" data-social-action="tweet"
+                data-social-target="https://bulma.io" target="_blank"
+                href="https://twitter.com/intent/tweet?text=Bulma: a modern CSS framework based on Flexbox&amp;hashtags=bulmaio&amp;url=https://bulma.io&amp;via=jgthms">
+                <span class="icon">
+                  <i class="fab fa-twitter"></i>
+                </span>
+                <span>
+                  Tweet
+                </span>
+              </a>
+            </p>
+            <p class="control">
+              <a class="button is-primary"
+                href="https://github.com/jgthms/bulma/releases/download/0.9.3/bulma-0.9.3.zip">
+                <span class="icon">
+                  <i class="fas fa-download"></i>
+                </span>
+                <span>Download</span>
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <section class='columns' id="input-section">
+      <div id='location-input' class="card column">
+        <h3 class='title'>Where Would You Like To Go?</h3>
+        <div class="">
+          <input class="input mb-5 is-success" type="text" placeholder="Warning input">
+          <button class="button is-dark">Dark</button>
+        </div>
+      </div>
+      <div id='budget-input' class="card column">
+        <h3 class='title'>How Much You Got?</h3>
+        <label for="entire-budget">What's your entire budget?</label>
+        <input class="input mb-5 is-success is-three-quarters" name='entire-budget' type="text"
+          placeholder="Flight, food, activities and all...">
+        <input class="input mb-5 is-success is-three-quarters" type="text" placeholder="Warning input">
+        <button class="button is-dark is-one-quarter">Dark</button>
+      </div>
+    </section>
+    <section class='columns' id='location-section'>
+      <div class="card column">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-48x48">
+                <img src="./assets/images/navbar.png" alt="Placeholder image">
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-4">Location Name</p>
+            </div>
+          </div>
 
-              <div class="card column">
-                <div class="card-content">
-                  <div class="media">
-                    <div class="media-left">
-                      <figure class="image is-48x48">
-                        <img src="assets/images/navbar.png" alt="Placeholder image">
-                      </figure>
-                    </div>
-                    <div class="media-content">
-                      <p class="title is-4">Location Name</p>
-                    </div>
-                  </div>
-              
-                  <div class="content">
-                    <h4>Price of Flight</h4>
-                    <h4>Currency Conversion:</h4>
-        
-                  </div>
-                </div>
-              </div>
-          </section>
-      </main>
+          <div class="content">
+            <h4>Price of Flight</h4>
+            <h4>Currency Conversion:</h4>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="card column">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-48x48">
+                <img src="assets/images/navbar.png" alt="Placeholder image">
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-4">Location Name</p>
+            </div>
+          </div>
+
+          <div class="content">
+            <h4>Price of Flight:</h4>
+            <h4>Currency Conversion:</h4>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="card column">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-48x48">
+                <img src="assets/images/navbar.png" alt="Placeholder image">
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-4">Location Name</p>
+            </div>
+          </div>
+
+          <div class="content">
+            <h4>Price of Flight</h4>
+            <h4>Currency Conversion:</h4>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
 
 
@@ -109,8 +185,11 @@
 
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="./assets/js/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
