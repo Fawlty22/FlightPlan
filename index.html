@@ -13,94 +13,29 @@
 </head>
 
 <body>
-  <nav class="navbar is-transparent">
+  <nav class="navbar is-transparent has-background-blue">
+
     <div class="navbar-brand">
-      <a class="navbar-item" href="#">
-        <img src="./assets/images/navbar.png" alt="" width="30" height="24" class="d-inline-block fs-3 align-text-top">
+
+      <a id = "plane-container" class="navbar-item" href="#">
+        <img id = "brand-header">
       </a>
-      <h1 class="navbar-item title">Save2Fly</h1>
-      <div class="navbar-burger" data-target="navbarExampleTransparentExample">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+
+      <h1 id = "brand-title" class="navbar-item title mb-0">Save2Fly</h1>
+
     </div>
 
-    <div id="navbarExampleTransparentExample" class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item" href="https://bulma.io/">
-          Home
-        </a>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="https://bulma.io/documentation/overview/start/">
-            Docs
-          </a>
-          <div class="navbar-dropdown is-boxed">
-            <a class="navbar-item" href="https://bulma.io/documentation/overview/start/">
-              Overview
-            </a>
-            <a class="navbar-item" href="https://bulma.io/documentation/overview/modifiers/">
-              Modifiers
-            </a>
-            <a class="navbar-item" href="https://bulma.io/documentation/columns/basics/">
-              Columns
-            </a>
-            <a class="navbar-item" href="https://bulma.io/documentation/layout/container/">
-              Layout
-            </a>
-            <a class="navbar-item" href="https://bulma.io/documentation/form/general/">
-              Form
-            </a>
-            <hr class="navbar-divider">
-            <a class="navbar-item" href="https://bulma.io/documentation/elements/box/">
-              Elements
-            </a>
-            <a class="navbar-item is-active" href="https://bulma.io/documentation/components/breadcrumb/">
-              Components
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="field is-grouped">
-            <p class="control">
-              <a class="bd-tw-button button" data-social-network="Twitter" data-social-action="tweet"
-                data-social-target="https://bulma.io" target="_blank"
-                href="https://twitter.com/intent/tweet?text=Bulma: a modern CSS framework based on Flexbox&amp;hashtags=bulmaio&amp;url=https://bulma.io&amp;via=jgthms">
-                <span class="icon">
-                  <i class="fab fa-twitter"></i>
-                </span>
-                <span>
-                  Tweet
-                </span>
-              </a>
-            </p>
-            <p class="control">
-              <a class="button is-primary"
-                href="https://github.com/jgthms/bulma/releases/download/0.9.3/bulma-0.9.3.zip">
-                <span class="icon">
-                  <i class="fas fa-download"></i>
-                </span>
-                <span>Download</span>
-              </a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
   </nav>
   <main>
-    <section class='columns' id="input-section">
-      <div id='location-input' class="card column">
+    <section class='columns m-2' id="input-section">
+      <div id='location-input' class="card column m-1">
         <h3 class='title'>Where Would You Like To Go?</h3>
         <div class="">
           <input class="input mb-5 is-success" type="text" placeholder="Warning input">
           <button class="button is-dark">Dark</button>
         </div>
       </div>
-      <div id='budget-input' class="card column">
+      <div id='budget-input' class="card column m-1">
         <h3 class='title'>How Much You Got?</h3>
         <label for="entire-budget">What's your entire budget?</label>
         <input class="input mb-5 is-success is-three-quarters" name='entire-budget' type="text"
@@ -109,8 +44,8 @@
         <button class="button is-dark is-one-quarter">Dark</button>
       </div>
     </section>
-    <section class='columns' id='location-section'>
-      <div class="card column">
+    <section class='columns m-2' id='location-section'>
+      <div class="card column m-1">
         <div class="card-content">
           <div class="media">
             <div class="media-left">
@@ -131,7 +66,7 @@
         </div>
       </div>
 
-      <div class="card column">
+      <div class="card column m-1">
         <div class="card-content">
           <div class="media">
             <div class="media-left">
@@ -152,7 +87,7 @@
         </div>
       </div>
 
-      <div class="card column">
+      <div class="card column m-1">
         <div class="card-content">
           <div class="media">
             <div class="media-left">
