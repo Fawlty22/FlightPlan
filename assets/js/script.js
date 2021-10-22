@@ -1,7 +1,6 @@
-//first destination card appears
 
-//second money card appears
 
+<<<<<<< HEAD
 //list of flights for destinations
 //documentation for flight API https://www.flightapi.io/docs/#getting-started
 const flightAPIKey = "6170dd58559f311752870242"
@@ -29,3 +28,24 @@ fetch(`https://v6.exchangerate-api.com/v6/${exchangeAPIKey}/latest/USD`)
 // .catch(function(error) {
 // 	console.log(error);
 // });
+=======
+var displayBudgetCard = function() {
+    $('#budget-input').addClass('is-block')
+}
+
+var displayLocationCards = function() {
+    $('#location-section').addClass('is-flex')
+}
+
+
+
+
+
+
+$('#location-input').on('click', 'button', function(){
+    displayBudgetCard();
+})
+$('#budget-input').on('click', 'button', function(){
+    displayLocationCards();
+})
+>>>>>>> 29fbdb8f599be5c777364bc11a132e824d976f82
