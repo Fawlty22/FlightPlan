@@ -35,13 +35,22 @@ main{
     display: flex;
     width: 25%;
     height: 100%;
+    padding: 0px;
+    margin-left: 12px;
 }
-#brand-header {
-    height: 100%;
-    width: 100%;
-    background-image: url("../../assets/images/navbar.png");
-    background-size: cover;
+
+.fa-rocket {
+    height: 85%;
+    width: 85%;
+    background-image: url("../../assets/images/rocket-solid.svg");
+    background-size:inherit;
     background-position: center;
+    background-repeat: no-repeat;
+}
+
+#input-section {
+    display: flex;
+    justify-content: space-around;
 }
 
 #budget-input {
@@ -50,4 +59,8 @@ main{
 
 #location-section {
     display: none; 
+}
+
+.input, .button {
+    background-color: lightblue;
 }
