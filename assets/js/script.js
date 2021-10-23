@@ -66,7 +66,7 @@ var callFlightAPI = function () {
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
-
+                    console.log(data)
                 }
                 )
             }
@@ -101,5 +101,5 @@ $('#location-input').on('click', 'button', function () {
 
 $('#budget-input').on('click', 'button', function () {
     displayLocationCards();
-    // callFlightAPI();
+    callFlightAPI();
 })
