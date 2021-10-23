@@ -1,4 +1,4 @@
-var countriesArray = [
+var currencyCodesArray = [
     {
         "AlphabeticCode": "AFN",
         "Currency": "Afghani",

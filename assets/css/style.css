@@ -64,3 +64,7 @@ main{
 .input, .button {
     background-color: lightblue;
 }
+
+img {
+    border-radius: 10px;
+}

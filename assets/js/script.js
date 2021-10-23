@@ -13,11 +13,11 @@ var displayLocationCards = function () {
 var convertCountryInput = function (data) {
     var desiredLocation = $('#input-bar').val().trim();
     //loop through iso.js to find matching object 
-    for (i = 0; i < countriesArray.length; i++) {
-        var grabbedName = countriesArray[i].Entity
-        if (desiredLocation === grabbedName.toLowerCase()) {
+    for (i = 0; i < currencyCodesArray.length; i++) {
+        var grabbedName = currencyCodesArray[i].Entity
+        if (desiredLocation.toLowerCase() === grabbedName.toLowerCase()) {
             //declare variable with country code = to user inupt
-            var countryCode = countriesArray[i].AlphabeticCode
+            var countryCode = currencyCodesArray[i].AlphabeticCode
             //add it to data obj
             data.currency_code = countryCode
             //convert conversion rate object to array
@@ -28,12 +28,14 @@ var convertCountryInput = function (data) {
 
             console.log('data', data)
             convertToCurrencyVariable(data);
+            convertToCountryCode();
             break;
         }
     }
     //clear input-bar
     $('#input-bar').val('')
 }
+
 //select the conversion rate using the converted currency code
 var convertToCurrencyVariable = function (data) {
     //loop through the array and find the mathcing country code, then grab the conversion rate
@@ -45,15 +47,31 @@ var convertToCurrencyVariable = function (data) {
     }
 }
 
+
+//convert user input country to country code for flight api call
+var convertToCountryCode = function(){
+    var desiredLocation = $('#input-bar').val().trim();
+
+    for (i = 0; i < countryCodesArray.length; i++){
+        if (desiredLocation.toLowerCase() == countryCodesArray[i].name.toLowerCase()) {
+            var countryCode = countryCodesArray[i].code;
+            console.log('countryCode', countryCode)
+
+            callFlightAPI(countryCode);
+        }
+    }
+}
+
 //API Calls
-var callFlightAPI = function () {
-    var destinationCountryCode = ''
-    var originAirportCode = ''
+var callFlightAPI = function (countryCode) {
+    
+    var destinationCountryCode = countryCode
+    var originAirportCode = 'JFK'
     //url variables
     var originPlace = originAirportCode + '-sky'
     var destinationPlace = destinationCountryCode + '-sky'
     var outboundDate = '2021-11-22'
-    var inboundDate = '2021-12-01'
+    var inboundDate = '2021-12-07'
 
     //API call for flight data
     fetch(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${originPlace}/${destinationPlace}/${outboundDate}?inboundpartialdate=${inboundDate}`, {
@@ -105,5 +123,4 @@ $('#location-input').on('click', 'button', function () {
 
 $('#budget-input').on('click', 'button', function () {
     displayLocationCards();
-    callFlightAPI();
 })
