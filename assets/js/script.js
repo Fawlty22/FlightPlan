@@ -22,8 +22,9 @@ var convertCountryInput = function (data) {
             data.currency_code = countryCode
             //convert conversion rate object to array
             var dataArray = data.conversion_rates
-            var result = Object.entries(dataArray);
-            data.array_conversion_rates = result
+            var resultArray = Object.entries(dataArray);
+            //add it to object as well
+            data.array_conversion_rates = resultArray
 
             console.log('data', data)
             convertToCurrencyVariable(data);
@@ -33,30 +34,29 @@ var convertCountryInput = function (data) {
     //clear input-bar
     $('#input-bar').val('')
 }
-
+//select the conversion rate using the converted currency code
 var convertToCurrencyVariable = function (data) {
+    //loop through the array and find the mathcing country code, then grab the conversion rate
     for (i = 0; i < data.array_conversion_rates.length; i++) {
         if (data.currency_code == data.array_conversion_rates[i][0]) {
-            //this is
             var currencyVariable = data.array_conversion_rates[i][1]
             console.log(currencyVariable)
         }
     }
 }
 
-// //API call for currency conversion
-// const exchangeAPIKey = "10a0a9e87b4e3dfb6a11dfe5"
-// fetch(`https://v6.exchangerate-api.com/v6/${exchangeAPIKey}/latest/USD`)
-// .then(function(response){
-//     return response.json();
-// })
-// .then(function(exchangeRates){
-//     console.log(exchangeRates);
-// });
-
+//API Calls
 var callFlightAPI = function () {
+    var destinationCountryCode = ''
+    var originAirportCode = ''
+    //url variables
+    var originPlace = originAirportCode + '-sky'
+    var destinationPlace = destinationCountryCode + '-sky'
+    var outboundDate = '2021-11-22'
+    var inboundDate = '2021-12-01'
+
     //API call for flight data
-    fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/SFO-sky/JFK-sky/2021-10-30?inboundpartialdate=2021-11-10", {
+    fetch(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${originPlace}/${destinationPlace}/${outboundDate}?inboundpartialdate=${inboundDate}`, {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
@@ -72,7 +72,6 @@ var callFlightAPI = function () {
             }
         });
 }
-
 
 var callCurrAPI = function () {
     //API call for currency conversion
@@ -94,6 +93,11 @@ const flightAPIKey = "6170dd58559f311752870242"
 const exchangeAPIKey = "10a0a9e87b4e3dfb6a11dfe5"
 
 
+
+
+
+
+//event listeners
 $('#location-input').on('click', 'button', function () {
     displayBudgetCard();
     callCurrAPI();
