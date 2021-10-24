@@ -44,6 +44,7 @@ var convertToCurrencyVariable = function (data) {
         if (data.currency_code == data.array_conversion_rates[i][0]) {
             var currencyVariable = data.array_conversion_rates[i][1]
             console.log(currencyVariable)
+            break;
         }
     }
 }
@@ -59,6 +60,7 @@ var convertToCountryCode = function(){
             console.log('countryCode', countryCode)
 
             callFlightAPI(countryCode);
+            break;
         }
     }
 }
