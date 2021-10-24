@@ -15,7 +15,8 @@ var convertCountryInput = function (data) {
     //loop through iso.js to find matching object 
     for (i = 0; i < currencyCodesArray.length; i++) {
         var grabbedName = currencyCodesArray[i].Entity
-        if (desiredLocation.toLowerCase() === grabbedName.toLowerCase()) {
+        //If desired location pulled from user input is included in the entity string in the massive currency codes array in iso.js
+        if (grabbedName.toLowerCase().includes(desiredLocation.toLowerCase())) {
             //declare variable with country code = to user inupt
             var countryCode = currencyCodesArray[i].AlphabeticCode
             //add it to data obj
@@ -38,11 +39,12 @@ var convertCountryInput = function (data) {
 
 //select the conversion rate using the converted currency code
 var convertToCurrencyVariable = function (data) {
-    //loop through the array and find the mathcing country code, then grab the conversion rate
+    //loop through the array and find the matching country code, then grab the conversion rate
     for (i = 0; i < data.array_conversion_rates.length; i++) {
         if (data.currency_code == data.array_conversion_rates[i][0]) {
             var currencyVariable = data.array_conversion_rates[i][1]
             console.log(currencyVariable)
+            break;
         }
     }
 }
@@ -53,11 +55,12 @@ var convertToCountryCode = function(){
     var desiredLocation = $('#input-bar').val().trim();
 
     for (i = 0; i < countryCodesArray.length; i++){
-        if (desiredLocation.toLowerCase() == countryCodesArray[i].name.toLowerCase()) {
+        if (countryCodesArray[i].name.toLowerCase().includes(desiredLocation.toLowerCase())) {
             var countryCode = countryCodesArray[i].code;
             console.log('countryCode', countryCode)
 
             callFlightAPI(countryCode);
+            break;
         }
     }
 }
@@ -81,14 +84,17 @@ var callFlightAPI = function (countryCode) {
             "x-rapidapi-key": "66c69d12e4msh8b9325bed3418c9p1018dbjsn8cf4ae03c51f"
         }
     })
-        .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (data) {
-                    console.log(data)
-                }
-                )
+    .then(function (response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+                console.log(data)
             }
-        });
+            )
+        }
+    })
+    .catch(function(err){
+        console.error(err);
+    })
 }
 
 var callCurrAPI = function () {
@@ -97,7 +103,6 @@ var callCurrAPI = function () {
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
-
                     convertCountryInput(data)
                 }
                 )
