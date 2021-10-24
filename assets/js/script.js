@@ -1,4 +1,14 @@
 var data = [];
+var searchHistory = JSON.parse(localStorage.getItem("search-history")) || [];
+const exchangeAPIKey = "10a0a9e87b4e3dfb6a11dfe5"
+
+
+
+var clearSearchHistory = function() {
+    localStorage.clear();
+    searchHistory = [];
+    $('#search-history-list').empty();
+}
 
 var displayBudgetCard = function () {
     $('#budget-input').addClass('is-block')
@@ -8,6 +18,42 @@ var displayLocationCards = function () {
     $('#location-section').addClass('is-flex')
 }
 
+//changes span element to display the location that was searched for
+var displayDesiredDestination = function() {
+    $("#destination-text").text("You are going to " + $('#input-bar').val().trim() + ".")
+}
+
+//pushes the location that was searched for to local storage with "search-history" key
+var desiredDestinationStorage = function() {
+    searchHistory.push($('#input-bar').val().trim());
+    localStorage.setItem("search-history", JSON.stringify(searchHistory));
+}
+
+// first deletes all elements in the dropdown menu, then repopulates the dropdown menu from searchHistory array
+var populateSearchHistory = function(){
+    $('#search-history-list').empty();
+    //Loop through searchHistory array to create buttons for previously searched cities. Add event listeners to the buttons to trigger API calls and change searched text
+    for(var i=0; i<searchHistory.length; i++) {
+        var searchedLocation = $('<button/>', {
+            text: searchHistory[i],
+            class: "button is-info navbar-item",
+            click: function() {
+                displayDesiredDestination();
+                callCurrAPI();
+                $("#destination-text").text("You are going to " + $(this).text() + ".")
+            }
+        });
+        $('#search-history-list').append(searchedLocation);
+    }
+    var historyClear = $('<button/>', {
+        text: "Clear Search History",
+        class: "button is-warning navbar-item",
+        click: function() {
+            clearSearchHistory();
+        }
+    });
+    $('#search-history-list').append(historyClear);
+}
 
 //turn input into country code and run convertToCurrencyVariable
 var convertCountryInput = function (data) {
@@ -110,18 +156,11 @@ var callCurrAPI = function () {
         });
 }
 
-//list of flights for destinations
-//documentation for flight API https://www.flightapi.io/docs/#getting-started
-const flightAPIKey = "6170dd58559f311752870242"
-const exchangeAPIKey = "10a0a9e87b4e3dfb6a11dfe5"
-
-
-
-
-
-
 //event listeners
 $('#location-input').on('click', 'button', function () {
+    displayDesiredDestination();
+    desiredDestinationStorage();
+    populateSearchHistory();
     displayBudgetCard();
     callCurrAPI();
 })
@@ -129,3 +168,6 @@ $('#location-input').on('click', 'button', function () {
 $('#budget-input').on('click', 'button', function () {
     displayLocationCards();
 })
+
+//application initialization
+populateSearchHistory();

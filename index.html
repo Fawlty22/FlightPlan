@@ -13,16 +13,24 @@
 </head>
 
 <body>
-  <nav class="navbar is-transparent has-background-blue">
+  <!-- Navbar -->
+  <nav class="navbar is-transparent has-background-blue" role="navigation">
 
-    <div class="navbar-brand">
+    <div class="navbar-brand navbar-item has-dropdown is-hoverable">
 
       <a id="plane-container" class="navbar-item" href="#">
         <img src="./assets/images/rocket-solid.svg" class="fas fa-rocket"></img>
       </a>
 
       <h1 id="brand-title" class="navbar-item title mb-0">Flight Roulette</h1>
-
+      <!-- Search history link -->
+      <a class="navbar-link navbar-item">
+        Search History
+      </a>
+      <!-- Search history dropdown menu -->
+      <div id="search-history-list" class="navbar-dropdown is-right">
+        <button id="clear-search-history" class="navbar-item"></button>
+      </div>
     </div>
 
   </nav>
@@ -35,6 +43,7 @@
         <div class="">
           <input id='input-bar' class="input mb-5 is-success" type="text" placeholder="Warning input">
           <button class="button is-dark">Continue</button>
+          <span id="destination-text"></span>
         </div>
       </div>
       <!-- Budget Input-->
@@ -114,23 +123,13 @@
       </div>
     </section>
   </main>
-
-
-
-
-
-
-
-
-
-
-
+  <!-- Javascript files -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
-    <script src="./assets/js/iso.js"></script>
-    <script src="./assets/js/countries.js"></script>
+  <script src="./assets/js/iso.js"></script>
+  <script src="./assets/js/countries.js"></script>
   <script src="./assets/js/script.js"></script>
 </body>
 
