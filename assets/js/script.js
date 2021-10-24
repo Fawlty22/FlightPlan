@@ -15,7 +15,8 @@ var convertCountryInput = function (data) {
     //loop through iso.js to find matching object 
     for (i = 0; i < currencyCodesArray.length; i++) {
         var grabbedName = currencyCodesArray[i].Entity
-        if (desiredLocation.toLowerCase() === grabbedName.toLowerCase()) {
+        //If desired location pulled from user input is included in the entity string in the massive currency codes array in iso.js
+        if (grabbedName.toLowerCase().includes(desiredLocation.toLowerCase())) {
             //declare variable with country code = to user inupt
             var countryCode = currencyCodesArray[i].AlphabeticCode
             //add it to data obj
@@ -81,14 +82,17 @@ var callFlightAPI = function (countryCode) {
             "x-rapidapi-key": "66c69d12e4msh8b9325bed3418c9p1018dbjsn8cf4ae03c51f"
         }
     })
-        .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (data) {
-                    console.log(data)
-                }
-                )
+    .then(function (response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+                console.log(data)
             }
-        });
+            )
+        }
+    })
+    .catch(function(err){
+        console.error(err);
+    })
 }
 
 var callCurrAPI = function () {
@@ -97,7 +101,6 @@ var callCurrAPI = function () {
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
-
                     convertCountryInput(data)
                 }
                 )
