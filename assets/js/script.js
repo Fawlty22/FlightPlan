@@ -4,6 +4,10 @@ var displayBudgetCard = function () {
     $('#budget-input').addClass('is-block')
 }
 
+var displayDesiredDestination = function() {
+    $("#destination-text").text("You are going to " + $('#input-bar').val().trim() + ".")
+}
+
 var displayLocationCards = function () {
     $('#location-section').addClass('is-flex')
 }
@@ -122,6 +126,7 @@ const exchangeAPIKey = "10a0a9e87b4e3dfb6a11dfe5"
 
 //event listeners
 $('#location-input').on('click', 'button', function () {
+    displayDesiredDestination();
     displayBudgetCard();
     callCurrAPI();
 })
