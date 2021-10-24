@@ -2,22 +2,12 @@ var data = [];
 var searchHistory = JSON.parse(localStorage.getItem("search-history")) || [];
 const exchangeAPIKey = "10a0a9e87b4e3dfb6a11dfe5"
 
-// first deletes all elements in the dropdown menu, then repopulates the dropdown menu from searchHistory array
-var populateSearchHistory = function(){
+
+
+var clearSearchHistory = function() {
+    localStorage.clear();
+    searchHistory = [];
     $('#search-history-list').empty();
-    //Loop through searchHistory array to create buttons for previously searched cities. Add event listeners to the buttons to trigger API calls and change searched text
-    for(var i=0; i<searchHistory.length; i++) {
-        var searchedLocation = $('<button/>', {
-            text: searchHistory[i],
-            class: "navbar-item",
-            click: function() {
-                displayDesiredDestination();
-                callCurrAPI();
-                $("#destination-text").text("You are going to " + $(this).text() + ".")
-            }
-        });
-        $('#search-history-list').append(searchedLocation);
-    }
 }
 
 var displayBudgetCard = function () {
@@ -39,6 +29,31 @@ var desiredDestinationStorage = function() {
     localStorage.setItem("search-history", JSON.stringify(searchHistory));
 }
 
+// first deletes all elements in the dropdown menu, then repopulates the dropdown menu from searchHistory array
+var populateSearchHistory = function(){
+    $('#search-history-list').empty();
+    //Loop through searchHistory array to create buttons for previously searched cities. Add event listeners to the buttons to trigger API calls and change searched text
+    for(var i=0; i<searchHistory.length; i++) {
+        var searchedLocation = $('<button/>', {
+            text: searchHistory[i],
+            class: "button is-info navbar-item",
+            click: function() {
+                displayDesiredDestination();
+                callCurrAPI();
+                $("#destination-text").text("You are going to " + $(this).text() + ".")
+            }
+        });
+        $('#search-history-list').append(searchedLocation);
+    }
+    var historyClear = $('<button/>', {
+        text: "Clear Search History",
+        class: "button is-warning navbar-item",
+        click: function() {
+            clearSearchHistory();
+        }
+    });
+    $('#search-history-list').append(historyClear);
+}
 
 //turn input into country code and run convertToCurrencyVariable
 var convertCountryInput = function (data) {
