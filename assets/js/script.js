@@ -39,7 +39,7 @@ var convertCountryInput = function (data) {
 
 //select the conversion rate using the converted currency code
 var convertToCurrencyVariable = function (data) {
-    //loop through the array and find the mathcing country code, then grab the conversion rate
+    //loop through the array and find the mathching country code, then grab the conversion rate
     for (i = 0; i < data.array_conversion_rates.length; i++) {
         if (data.currency_code == data.array_conversion_rates[i][0]) {
             var currencyVariable = data.array_conversion_rates[i][1]
@@ -54,7 +54,7 @@ var convertToCountryCode = function(){
     var desiredLocation = $('#input-bar').val().trim();
 
     for (i = 0; i < countryCodesArray.length; i++){
-        if (desiredLocation.toLowerCase() == countryCodesArray[i].name.toLowerCase()) {
+        if (countryCodesArray[i].name.toLowerCase().includes(desiredLocation.toLowerCase())) {
             var countryCode = countryCodesArray[i].code;
             console.log('countryCode', countryCode)
 
