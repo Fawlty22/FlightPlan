@@ -57,8 +57,22 @@ main{
     display: none;
 }
 
+#budget-input h3 {
+    text-align: center;
+}
+
 #location-section {
     display: none; 
+}
+
+#location-input {
+/* display: flex;
+align-items: center;
+justify-content: center; */  
+}
+
+#location-input-container h3 {
+    text-align: center;
 }
 
 .input, .button {

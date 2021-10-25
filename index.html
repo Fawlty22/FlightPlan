@@ -39,21 +39,37 @@
     <section class='columns m-3' id="input-section">
       <!-- Location Input-->
       <div id='location-input' class="card column is-half m-1">
-        <h3 class='title'>Where Would You Like To Go?</h3>
-        <div class="">
-          <input id='input-bar' class="input mb-5 is-success" type="text" placeholder="Destination">
+        <div id='location-input-container'>
+          <h3 class='title'>Where Would You Like To Go?</h3>
+          
+          <label for="input-bar">Enter your desired vacation destination below:</label>
+          <input id='input-bar' class="input mb-5 is-success" type="text" placeholder="Anywhere except Antarctica... Much too cold.">
+          
           <button class="button is-dark">Continue</button>
           <span id="destination-text"></span>
         </div>
       </div>
-      <!-- Budget Input-->
+      <!-- Budget Input Card-->
       <div id='budget-input' class="card column is-half m-1">
         <h3 class='title'>How Much You Got?</h3>
-        <label for="entire-budget">What's your entire budget?</label>
-        <input class="input mb-5 is-success" name='entire-budget' type="text"
-          placeholder="Flight, food, activities and all...">
-        <input class="input mb-5 is-success" type="text" placeholder="Warning input">
-        <button class="button is-dark is-one-quarter">Submit</button>
+        <!--Budget Inputs-->
+        <div id="budget-inputs-container">
+
+          <label for="entire-budget-input">What's your entire budget?</label>
+          <input  id='entire-budget-input' class="input mb-5 is-success" name='entire-budget' type="text"
+            placeholder="Flight, food, activities and all...">
+
+          <label for="just-food-input">How much do you plan to spend on food?</label>
+          <input  id='just-food-input' class="input mb-5 is-success" name='entire-budget' type="text"
+            placeholder="Ordering in, eating out, or cooking in your hotel...">
+
+          <label for="activities-input">How much do you plan to spend on activities and experiences?</label>
+          <input  id='activities-input' class="input mb-5 is-success" name='entire-budget' type="text"
+            placeholder="You can bring it with you when you die...">
+
+          <button class="button is-dark is-one-quarter">Submit</button>
+        </div>
+
       </div>
     </section>
     <!-- Location Section -->
