@@ -59,7 +59,7 @@ var populateSearchHistory = function(){
 }
 
 //turn input into country code and run convertToCurrencyVariable
-var convertCountryInput = function (data) {
+var convertCountryInput = function (dataCurr) {
     var desiredLocation = $('#input-bar').val().trim();
     //loop through iso.js to find matching object 
     for (i = 0; i < currencyCodesArray.length; i++) {
@@ -69,15 +69,15 @@ var convertCountryInput = function (data) {
             //declare variable with country code = to user input
             var countryCode = currencyCodesArray[i].AlphabeticCode
             //add it to data obj
-            data.currency_code = countryCode
+            dataCurr.currency_code = countryCode
             //convert conversion rate object to array
-            var dataArray = data.conversion_rates
+            var dataArray = dataCurr.conversion_rates
             var resultArray = Object.entries(dataArray);
             //add it to object as well
-            data.array_conversion_rates = resultArray
+            dataCurr.array_conversion_rates = resultArray
 
-            console.log('data', data)
-            convertToCurrencyVariable(data);
+            console.log('data', dataCurr)
+            convertToCurrencyVariable(dataCurr);
             convertToCountryCode();
             break;
         }
@@ -85,11 +85,12 @@ var convertCountryInput = function (data) {
 }
 
 //select the conversion rate using the converted currency code
-var convertToCurrencyVariable = function (data) {
+var convertToCurrencyVariable = function (dataCurr) {
     //loop through the array and find the matching country code, then grab the conversion rate
-    for (i = 0; i < data.array_conversion_rates.length; i++) {
-        if (data.currency_code == data.array_conversion_rates[i][0]) {
-            var currencyVariable = data.array_conversion_rates[i][1]
+    for (i = 0; i < dataCurr.array_conversion_rates.length; i++) {
+        if (dataCurr.currency_code == dataCurr.array_conversion_rates[i][0]) {
+            var currencyVariable = dataCurr.array_conversion_rates[i][1]
+            
             console.log(currencyVariable)
             break;
         }
@@ -124,6 +125,39 @@ var budgetMath = function() {
 
 }
 
+var createCards = function(dataFlight) {
+    for (i = 0; i < dataFlight.Quotes.length; i++){
+        
+        var quoteID = dataFlight.Quotes[i].OutboundLeg.DestinationId
+        //loop through the places array to convert destination ID into text
+        for (i = 0; i < dataFlight.Places.length; i++){
+            if (dataFlight.Places[i].PlaceId == quoteID){
+                quoteID = dataFlight.Places[i].CityName;
+            }
+        }
+
+        //make the main card div
+        var card = $('<div>').addClass('card column m-1');
+        //make the card-content div
+        var cardContent = $('<div>') .addClass('card-content');
+        //make the media div
+        var mediaDiv =$('<div>') .addClass('media');
+        // make the media-left div
+        var mediaLeftDiv = $('<div>').addClass('media-left');
+        //make the figure element
+        var figure = $('<figure>').addClass('image is-48x48');
+        //make the img element and append to figure
+        var image = $('<img>').attr('src', `./assets/images/number${i}.jpg`)
+        figure.append(image)
+        //make the media content div
+        var mediaContent = $('<div>').addClass('media-content');
+        //make the title using quoteID which is the city name of destination airport
+        var title = $('<p>').addClass('title is-4').text(quoteID)
+        //make the content div 
+        $('<div>').addClass('content')
+        //make the h4's that hold flight price and currency conversion
+    }
+}
 
 
 //API Calls
@@ -147,8 +181,8 @@ var callFlightAPI = function (countryCode) {
     })
     .then(function (response) {
         if (response.ok) {
-            response.json().then(function (data) {
-                console.log(data)
+            response.json().then(function (dataFlight) {
+                console.log(dataFlight)
             }
             )
         }
@@ -167,8 +201,8 @@ var callCurrAPI = function () {
     fetch(`https://v6.exchangerate-api.com/v6/${exchangeAPIKey}/latest/USD`)
         .then(function (response) {
             if (response.ok) {
-                response.json().then(function (data) {
-                    convertCountryInput(data)
+                response.json().then(function (dataCurr) {
+                    convertCountryInput(dataCurr)
                 }
                 )
             }
