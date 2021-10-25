@@ -56,18 +56,19 @@
         <div id="budget-inputs-container">
 
           <label for="entire-budget-input">What's your entire budget?</label>
-          <input  id='entire-budget-input' class="input mb-5 is-success" name='entire-budget' type="text"
+          <input  id='entire-budget-input' class="input mb-5 is-success" name='entire-budget' type="number"
             placeholder="Flight, food, activities and all...">
 
-          <label for="just-food-input">How much do you plan to spend on food?</label>
-          <input  id='just-food-input' class="input mb-5 is-success" name='entire-budget' type="text"
+          <label for="food-input">How much do you plan to spend on food?</label>
+          <input  id='food-input' class="input mb-5 is-success" name='food-budget' type="number"
             placeholder="Ordering in, eating out, or cooking in your hotel...">
 
           <label for="activities-input">How much do you plan to spend on activities and experiences?</label>
-          <input  id='activities-input' class="input mb-5 is-success" name='entire-budget' type="text"
+          <input  id='activities-input' class="input mb-5 is-success" name='activities-budget' type="number"
             placeholder="You can bring it with you when you die...">
 
           <button class="button is-dark is-one-quarter">Submit</button>
+          <span id="budget-text"></span>
         </div>
 
       </div>
