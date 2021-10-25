@@ -156,11 +156,12 @@ var createCards = function(dataFlight, dataCurr) {
         //make the content div 
         var contentDiv = $('<div>').addClass('content')
         //make the h4's that hold flight price and currency conversion
-        // var h4Price = $('<h4>').text('Price of Flight: $' + dataFlight.Quotes[i].MinPrice)
+        var h4Price = $('<h4>').text('Price of Flight: $' + dataFlight.Quotes[i].MinPrice)
         var h4Currency = $('<h4>').text('Currency Conversion Rate: 1 to ' + dataCurr.desiredConversion)
 
         //append h4's to contentDiv
         contentDiv.append(h4Currency);
+        contentDiv.append(h4Price)
         //append image to figure
         // figure.append(image);
         //append figure to mediaLeftDiv
