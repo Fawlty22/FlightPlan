@@ -112,6 +112,20 @@ var convertToCountryCode = function(){
     }
 }
 
+//budget math function
+var budgetMath = function() {
+    var entireBudget = Number($('#entire-budget-input').val());
+    var foodNumber = Number($('#food-input').val());
+    var activitiesNumber = Number($('#activities-input').val());
+    
+    var budgetForFlight = Number(entireBudget - (foodNumber + activitiesNumber));
+    
+    $('#budget-text').text('Great! That leaves $' + budgetForFlight + ' for your flight.')
+
+}
+
+
+
 //API Calls
 var callFlightAPI = function (countryCode) {
     
@@ -161,6 +175,11 @@ var callCurrAPI = function () {
         })
 }
 
+
+
+
+
+
 //event listeners
 $('#location-input').on('click', 'button', function () {
     displayDesiredDestination();
@@ -172,6 +191,7 @@ $('#location-input').on('click', 'button', function () {
 
 $('#budget-input').on('click', 'button', function () {
     displayLocationCards();
+    budgetMath();
 })
 
 //application initialization
