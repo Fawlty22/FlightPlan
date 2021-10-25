@@ -59,7 +59,7 @@ var populateSearchHistory = function(){
 }
 
 //turn input into country code and run convertToCurrencyVariable
-var convertCountryInput = function (data) {
+var convertCountryInput = function (dataCurr) {
     var desiredLocation = $('#input-bar').val().trim();
     //loop through iso.js to find matching object 
     for (i = 0; i < currencyCodesArray.length; i++) {
@@ -69,28 +69,29 @@ var convertCountryInput = function (data) {
             //declare variable with country code = to user input
             var countryCode = currencyCodesArray[i].AlphabeticCode
             //add it to data obj
-            data.currency_code = countryCode
+            dataCurr.currency_code = countryCode
             //convert conversion rate object to array
-            var dataArray = data.conversion_rates
+            var dataArray = dataCurr.conversion_rates
             var resultArray = Object.entries(dataArray);
             //add it to object as well
-            data.array_conversion_rates = resultArray
+            dataCurr.array_conversion_rates = resultArray
 
-            console.log('data', data)
-            convertToCurrencyVariable(data);
-            convertToCountryCode();
+            console.log('dataCurr', dataCurr)
+            convertToCurrencyVariable(dataCurr);
+            convertToCountryCode(dataCurr);
             break;
         }
     }
 }
 
 //select the conversion rate using the converted currency code
-var convertToCurrencyVariable = function (data) {
+var convertToCurrencyVariable = function (dataCurr) {
     //loop through the array and find the matching country code, then grab the conversion rate
-    for (i = 0; i < data.array_conversion_rates.length; i++) {
-        if (data.currency_code == data.array_conversion_rates[i][0]) {
-            var currencyVariable = data.array_conversion_rates[i][1]
-            console.log(currencyVariable)
+    for (i = 0; i < dataCurr.array_conversion_rates.length; i++) {
+        if (dataCurr.currency_code == dataCurr.array_conversion_rates[i][0]) {
+            var currencyVariable = dataCurr.array_conversion_rates[i][1]
+            dataCurr.desiredConversion = currencyVariable
+            console.log('currencyVariable', currencyVariable)
             break;
         }
     }
@@ -98,7 +99,7 @@ var convertToCurrencyVariable = function (data) {
 
 
 //convert user input country to country code for flight api call
-var convertToCountryCode = function(){
+var convertToCountryCode = function(dataCurr){
     var desiredLocation = $('#input-bar').val().trim();
 
     for (i = 0; i < countryCodesArray.length; i++){
@@ -106,7 +107,8 @@ var convertToCountryCode = function(){
             var countryCode = countryCodesArray[i].code;
             console.log('countryCode', countryCode)
 
-            callFlightAPI(countryCode);
+            
+            callFlightAPI(countryCode, dataCurr);
             break;
         }
     }
@@ -124,10 +126,65 @@ var budgetMath = function() {
 
 }
 
+var createCards = function(dataFlight, dataCurr) {
+    for (i = 0; i < dataFlight.Quotes.length; i++){
+        var quoteID = dataFlight.Quotes[i].OutboundLeg.DestinationId
+        //loop through the places array to convert destination ID into text
+        for (k = 0; k < dataFlight.Places.length; k++){
+            if (dataFlight.Places[k].PlaceId == quoteID){
+                quoteID = dataFlight.Places[k].CityName;
+            }
+        }
+
+        //make the main card div
+        var card = $('<div>').addClass('card column m-1');
+        //make the card-content div
+        var cardContent = $('<div>') .addClass('card-content');
+        //make the media div
+        var mediaDiv =$('<div>') .addClass('media');
+        // make the media-left div
+        var mediaLeftDiv = $('<div>').addClass('media-left');
+        //make the figure element
+        var figure = $('<figure>').addClass('image is-48x48');
+        //make the img element and append to figure
+        // var image = $('<img>').attr('src', `./assets/images/number${i}.jpg`)
+        // figure.append(image)
+        //make the media content div
+        var mediaContent = $('<div>').addClass('media-content');
+        //make the title using quoteID which is the city name of destination airport
+        var title = $('<p>').addClass('title is-4').text(quoteID)
+        //make the content div 
+        var contentDiv = $('<div>').addClass('content')
+        //make the h4's that hold flight price and currency conversion
+        var h4Price = $('<h4>').text('Price of Flight: $' + dataFlight.Quotes[i].MinPrice)
+        var h4Currency = $('<h4>').text('Currency Conversion Rate: 1 to ' + dataCurr.desiredConversion)
+
+        //append h4's to contentDiv
+        contentDiv.append(h4Price)
+        contentDiv.append(h4Currency);
+        //append image to figure
+        // figure.append(image);
+        //append figure to mediaLeftDiv
+        mediaLeftDiv.append(figure);
+        //append p to mediaContent
+        mediaContent.append(title);
+        //append mediacontent and medialeft to mediaDiv
+        mediaDiv.append(mediaLeftDiv);
+        mediaLeftDiv.append(mediaContent);
+        //append mediaDiv and content to cardContent
+        cardContent.append(mediaDiv);
+        cardContent.append(contentDiv);
+        //append cardContent to card
+        card.append(cardContent);
+        //append card to page
+        $('#location-section').append(card)
+       
+    }
+}
 
 
 //API Calls
-var callFlightAPI = function (countryCode) {
+var callFlightAPI = function (countryCode, dataCurr) {
     
     var destinationCountryCode = countryCode
     var originAirportCode = 'JFK'
@@ -147,8 +204,10 @@ var callFlightAPI = function (countryCode) {
     })
     .then(function (response) {
         if (response.ok) {
-            response.json().then(function (data) {
-                console.log(data)
+            response.json().then(function (dataFlight) {
+                
+                console.log('dataFlight', dataFlight)
+                createCards(dataFlight, dataCurr);
             }
             )
         }
@@ -158,7 +217,7 @@ var callFlightAPI = function (countryCode) {
         $('#input-bar').val('')
     })
     .catch(function(err){
-        console.error(err);
+        console.error('error', err);
     })
 }
 
@@ -167,8 +226,8 @@ var callCurrAPI = function () {
     fetch(`https://v6.exchangerate-api.com/v6/${exchangeAPIKey}/latest/USD`)
         .then(function (response) {
             if (response.ok) {
-                response.json().then(function (data) {
-                    convertCountryInput(data)
+                response.json().then(function (dataCurr) {
+                    convertCountryInput(dataCurr)
                 }
                 )
             }
