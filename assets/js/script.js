@@ -76,9 +76,9 @@ var convertCountryInput = function (dataCurr) {
             //add it to object as well
             dataCurr.array_conversion_rates = resultArray
 
-            console.log('data', dataCurr)
+            console.log('dataCurr', dataCurr)
             convertToCurrencyVariable(dataCurr);
-            convertToCountryCode();
+            convertToCountryCode(dataCurr);
             break;
         }
     }
@@ -90,8 +90,8 @@ var convertToCurrencyVariable = function (dataCurr) {
     for (i = 0; i < dataCurr.array_conversion_rates.length; i++) {
         if (dataCurr.currency_code == dataCurr.array_conversion_rates[i][0]) {
             var currencyVariable = dataCurr.array_conversion_rates[i][1]
-            
-            console.log(currencyVariable)
+            dataCurr.desiredConversion = currencyVariable
+            console.log('currencyVariable', currencyVariable)
             break;
         }
     }
@@ -99,7 +99,7 @@ var convertToCurrencyVariable = function (dataCurr) {
 
 
 //convert user input country to country code for flight api call
-var convertToCountryCode = function(){
+var convertToCountryCode = function(dataCurr){
     var desiredLocation = $('#input-bar').val().trim();
 
     for (i = 0; i < countryCodesArray.length; i++){
@@ -107,7 +107,8 @@ var convertToCountryCode = function(){
             var countryCode = countryCodesArray[i].code;
             console.log('countryCode', countryCode)
 
-            callFlightAPI(countryCode);
+            
+            callFlightAPI(countryCode, dataCurr);
             break;
         }
     }
@@ -125,7 +126,7 @@ var budgetMath = function() {
 
 }
 
-var createCards = function(dataFlight) {
+var createCards = function(dataFlight, dataCurr) {
     for (i = 0; i < dataFlight.Quotes.length; i++){
         
         var quoteID = dataFlight.Quotes[i].OutboundLeg.DestinationId
@@ -147,21 +148,43 @@ var createCards = function(dataFlight) {
         //make the figure element
         var figure = $('<figure>').addClass('image is-48x48');
         //make the img element and append to figure
-        var image = $('<img>').attr('src', `./assets/images/number${i}.jpg`)
-        figure.append(image)
+        // var image = $('<img>').attr('src', `./assets/images/number${i}.jpg`)
+        // figure.append(image)
         //make the media content div
         var mediaContent = $('<div>').addClass('media-content');
         //make the title using quoteID which is the city name of destination airport
         var title = $('<p>').addClass('title is-4').text(quoteID)
         //make the content div 
-        $('<div>').addClass('content')
+        var contentDiv = $('<div>').addClass('content')
         //make the h4's that hold flight price and currency conversion
+        // var h4Price = $('<h4>').text('Price of Flight: $' + dataFlight.Quotes[i].MinPrice)
+        var h4Currency = $('<h4>').text('Currency Conversion Rate: 1 to ' + dataCurr.desiredConversion)
+
+        //append h4's to contentDiv
+        contentDiv.append(h4Currency);
+        //append image to figure
+        // figure.append(image);
+        //append figure to mediaLeftDiv
+        mediaLeftDiv.append(figure);
+        //append p to mediaContent
+        mediaContent.append(title);
+        //append mediacontent and medialeft to mediaDiv
+        mediaDiv.append(mediaLeftDiv);
+        mediaLeftDiv.append(mediaContent);
+        //append mediaDiv and content to cardContent
+        cardContent.append(mediaDiv);
+        cardContent.append(contentDiv);
+        //append cardContent to card
+        card.append(cardContent);
+        //append card to page
+        $('#location-section').append(card)
+       
     }
 }
 
 
 //API Calls
-var callFlightAPI = function (countryCode) {
+var callFlightAPI = function (countryCode, dataCurr) {
     
     var destinationCountryCode = countryCode
     var originAirportCode = 'JFK'
@@ -182,7 +205,9 @@ var callFlightAPI = function (countryCode) {
     .then(function (response) {
         if (response.ok) {
             response.json().then(function (dataFlight) {
-                console.log(dataFlight)
+                
+                console.log('dataFlight', dataFlight)
+                createCards(dataFlight, dataCurr);
             }
             )
         }
@@ -192,7 +217,7 @@ var callFlightAPI = function (countryCode) {
         $('#input-bar').val('')
     })
     .catch(function(err){
-        console.error(err);
+        console.error('error', err);
     })
 }
 
