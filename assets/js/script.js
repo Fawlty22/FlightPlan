@@ -34,10 +34,13 @@ var populateSearchHistory = function(){
     $('#search-history-list').empty();
     //Loop through searchHistory array to create buttons for previously searched cities. Add event listeners to the buttons to trigger API calls and change searched text
     for(var i=0; i<searchHistory.length; i++) {
+        const capitalizedDestination = searchHistory[i].charAt(0).toUpperCase() + searchHistory[i].slice(1);
         var searchedLocation = $('<button/>', {
-            text: searchHistory[i],
+            text: capitalizedDestination,
             class: "button is-info navbar-item",
             click: function() {
+                const destination = $(this).text()
+                $('#input-bar').val(destination);
                 displayDesiredDestination();
                 callCurrAPI();
                 $("#destination-text").text("You are going to " + $(this).text() + ".")
@@ -63,7 +66,7 @@ var convertCountryInput = function (data) {
         var grabbedName = currencyCodesArray[i].Entity
         //If desired location pulled from user input is included in the entity string in the massive currency codes array in iso.js
         if (grabbedName.toLowerCase().includes(desiredLocation.toLowerCase())) {
-            //declare variable with country code = to user inupt
+            //declare variable with country code = to user input
             var countryCode = currencyCodesArray[i].AlphabeticCode
             //add it to data obj
             data.currency_code = countryCode
@@ -79,8 +82,6 @@ var convertCountryInput = function (data) {
             break;
         }
     }
-    //clear input-bar
-    $('#input-bar').val('')
 }
 
 //select the conversion rate using the converted currency code
@@ -138,6 +139,10 @@ var callFlightAPI = function (countryCode) {
             )
         }
     })
+    //clear input-bar
+    .then(function(){
+        $('#input-bar').val('')
+    })
     .catch(function(err){
         console.error(err);
     })
@@ -153,7 +158,7 @@ var callCurrAPI = function () {
                 }
                 )
             }
-        });
+        })
 }
 
 //event listeners
