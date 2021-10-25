@@ -160,8 +160,8 @@ var createCards = function(dataFlight, dataCurr) {
         var h4Currency = $('<h4>').text('Currency Conversion Rate: 1 to ' + dataCurr.desiredConversion)
 
         //append h4's to contentDiv
-        contentDiv.append(h4Currency);
         contentDiv.append(h4Price)
+        contentDiv.append(h4Currency);
         //append image to figure
         // figure.append(image);
         //append figure to mediaLeftDiv
