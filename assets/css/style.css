@@ -93,3 +93,7 @@ justify-content: center; */
 img {
     border-radius: 10px;
 }
+
+#date-container {
+    display:flex;
+}

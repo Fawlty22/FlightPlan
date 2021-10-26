@@ -9,7 +9,7 @@
     integrity="sha512-IgmDkwzs96t4SrChW29No3NXBIBv8baW490zk5aXvhCD8vuZM3yUSkbyTBcXohkySecyzIrUwiF/qV0cuPcL3Q=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="./assets/css/style.css">
-  <title>FlightRoulette</title> <!-- Name still up for debate -->
+  <title>FlightRoulette</title> 
 </head>
 
 <body>
@@ -56,11 +56,23 @@
       <div id='location-input' class="card column is-half m-1">
         <div id='location-input-container'>
           <h3 class='title'>Where Would You Like To Go?</h3>
+          
+          <label for="origin-bar">Enter the three-letter airport code of your origin: </label>
+          <input id='origin-bar' class="input mb-5 is-success" type="text" placeholder="JFK, LAX, SLC, etc.">
 
-          <label for="input-bar">Enter your desired vacation destination below:</label>
-          <input id='input-bar' class="input mb-5 is-success" type="text"
-            placeholder="Anywhere except Antarctica... Much too cold.">
-
+          <label for="input-bar">Which country would you like to travel to?</label>
+          <input id='input-bar' class="input mb-5 is-success" type="text" placeholder="Please choose an international vacation destination...">
+          
+          <div id="date-container">
+            <div>
+              <label for="date-bar-depart">What day do you want to leave?</label>
+              <input id='date-bar-depart' class="input mb-5 is-success" type="date" placeholder="Date">
+            </div> 
+            <div>
+              <label for="date-bar-return">When do you want to come back?</label>
+              <input id='date-bar-return' class="input mb-5 is-success" type="date" placeholder="Date">
+            </div>
+          </div>
           <button class="button is-dark">Continue</button>
           <span id="destination-text"></span>
         </div>
