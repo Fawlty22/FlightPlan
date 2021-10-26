@@ -259,5 +259,11 @@ $('#budget-input').on('click', 'button', function () {
     budgetMath();
 })
 
+//initial Modal that will let the user know quick information about the site, disappears and continues website load.
+$("#close-button").on("click", function () {
+    $("#starter-info").removeClass("is-active");
+    $("#input-section").addClass("is-flex");
+})
+
 //application initialization
 populateSearchHistory();
