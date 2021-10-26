@@ -241,11 +241,19 @@ var callCurrAPI = function () {
 
 //event listeners
 $('#location-input').on('click', 'button', function () {
-    displayDesiredDestination();
-    desiredDestinationStorage();
-    populateSearchHistory();
-    displayBudgetCard();
-    callCurrAPI();
+    if($('#input-bar').val()){
+        displayDesiredDestination();
+        desiredDestinationStorage();
+        populateSearchHistory();
+        displayBudgetCard();
+        callCurrAPI();
+    }else {$("#locationInfo").addClass('modal is-active')
+};
+})
+
+$("#modal-close").on('click', function(event){
+    $("#locationInfo").removeClass('is-active');
+    event.preventDefault();
 })
 
 $('#budget-input').on('click', 'button', function () {
