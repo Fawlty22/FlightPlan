@@ -43,7 +43,6 @@ var populateSearchHistory = function(){
                 $('#input-bar').val(destination);
                 displayDesiredDestination();
                 callCurrAPI();
-                displayBudgetCard();
                 $("#destination-text").text("You are going to " + $(this).text() + ".")
             }
         });
