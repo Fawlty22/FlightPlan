@@ -43,6 +43,7 @@ var populateSearchHistory = function(){
                 $('#input-bar').val(destination);
                 displayDesiredDestination();
                 callCurrAPI();
+                displayBudgetCard();
                 $("#destination-text").text("You are going to " + $(this).text() + ".")
             }
         });
@@ -101,6 +102,13 @@ var convertToCurrencyVariable = function (dataCurr) {
 //convert user input country to country code for flight api call
 var convertToCountryCode = function(dataCurr){
     var desiredLocation = $('#input-bar').val().trim();
+    //for the sake of when things exist, here I am declaring a few variables to pass as arguments into flightAPIcall
+    var originAirportCode = $('#origin-bar').val().trim().toUpperCase();
+    var leaveDate = $('#date-bar-depart').val()
+    var returnDate = $('#date-bar-return').val()
+
+
+
 
     for (i = 0; i < countryCodesArray.length; i++){
         if (countryCodesArray[i].name.toLowerCase().includes(desiredLocation.toLowerCase())) {
@@ -108,7 +116,7 @@ var convertToCountryCode = function(dataCurr){
             console.log('countryCode', countryCode)
 
             
-            callFlightAPI(countryCode, dataCurr);
+            callFlightAPI(countryCode, dataCurr, originAirportCode, leaveDate, returnDate);
             break;
         }
     }
@@ -184,18 +192,16 @@ var createCards = function(dataFlight, dataCurr) {
 
 
 //API Calls
-var callFlightAPI = function (countryCode, dataCurr) {
+var callFlightAPI = function (countryCode, dataCurr, originAirportCode, leaveDate, returnDate) {
     
     var destinationCountryCode = countryCode
-    var originAirportCode = 'JFK'
+    var originAirportCode = originAirportCode
     //url variables
     var originPlace = originAirportCode + '-sky'
     var destinationPlace = destinationCountryCode + '-sky'
-    var outboundDate = '2021-11-22'
-    var inboundDate = '2021-12-07'
 
     //API call for flight data
-    fetch(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${originPlace}/${destinationPlace}/${outboundDate}?inboundpartialdate=${inboundDate}`, {
+    fetch(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${originPlace}/${destinationPlace}/${leaveDate}?inboundpartialdate=${returnDate}`, {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
@@ -259,6 +265,12 @@ $("#modal-close").on('click', function(event){
 $('#budget-input').on('click', 'button', function () {
     displayLocationCards();
     budgetMath();
+})
+
+//initial Modal that will let the user know quick information about the site, disappears and continues website load.
+$("#close-button").on("click", function () {
+    $("#starter-info").removeClass("is-active");
+    $("#input-section").addClass("is-flex");
 })
 
 //application initialization

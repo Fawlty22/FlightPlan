@@ -9,6 +9,8 @@
     padding: 0;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+
 main{
     margin-top: 20px;
 }
@@ -49,10 +51,19 @@ main{
 }
 
 #input-section {
-    display: flex;
+    /* make sure to switch display to flex */
+    display: none;
     justify-content: space-around;
 }
 
+.modal-content h5, li {
+    color: var(--bg-color);
+    margin: 0 auto;
+    padding-left: 50px;
+}
+.modal-content li {
+    padding-left: 75px;
+}
 #budget-input {
     display: none;
 }
@@ -83,6 +94,7 @@ img {
     border-radius: 10px;
 }
 
-#locationInfo { */
-    /* display: none; */
-/* }
+
+#date-container {
+    display:flex;
+}
