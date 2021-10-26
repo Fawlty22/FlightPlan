@@ -94,6 +94,9 @@ img {
     border-radius: 10px;
 }
 
+/* #locationInfo {
+    display: none;
+ } */
 
 #date-container {
     display:flex;

@@ -73,18 +73,27 @@
               <input id='date-bar-return' class="input mb-5 is-success" type="date" placeholder="Date">
             </div>
           </div>
-          <button class="button is-dark">Continue</button>
+          <button id="continueBtn" class="button is-dark">Continue</button>
           <span id="destination-text"></span>
         </div>
       </div>
-      <div class="modal is-active" id="locationInfo">
+      <div class="modal" id="country-modal">
         <div class="modal-background"></div>
         <div class="modal-content">
           <div class="box">
-            <h1>Please input a country to travel to.</h1>
+            <h1>Please make sure you have filled in all necessary information.</h1>
           </div>
         </div>
-        <button id="modal-close" class="modal-close is-large" aria-label="close"></button>
+        <button id="input-modal-close" class="modal-close is-large" aria-label="close"></button>
+      </div>
+      <div class="modal" id="airport-modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+          <div class="box">
+            <h1>Please make sure you have filled in a three letter airport code.</h1>
+          </div>
+        </div>
+        <button id="airport-modal-close" class="modal-close is-large" aria-label="close"></button>
       </div>
       <!-- Budget Input Card-->
       <div id='budget-input' class="card column is-half m-1">
@@ -104,10 +113,19 @@
           <input id='activities-input' class="input mb-5 is-success" name='activities-budget' type="number"
             placeholder="You can't bring it with you when you die...">
 
-          <button class="button is-dark is-one-quarter">Submit</button>
+          <button id="submitBtn" class="button is-dark is-one-quarter">Submit</button>
           <span id="budget-text"></span>
         </div>
 
+      </div>
+      <div class="modal" id="budget-modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+          <div class="box">
+            <h1>Please make sure you have filled in a budget.</h1>
+          </div>
+        </div>
+        <button id="budget-modal-close" class="modal-close is-large" aria-label="close"></button>
       </div>
     </section>
     <!-- Location Section -->

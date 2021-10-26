@@ -219,9 +219,9 @@ var callFlightAPI = function (countryCode, dataCurr, originAirportCode, leaveDat
         }
     })
     //clear input-bar
-    .then(function(){
-        $('#input-bar').val('')
-    })
+    // .then(function(){
+    //     $('#input-bar').val('')
+    // })
     .catch(function(err){
         console.error('error', err);
     })
@@ -245,20 +245,52 @@ var callCurrAPI = function () {
 
 
 
-//event listeners
-$('#location-input').on('click', 'button', function () {
+//event listeners for input modals
+$('#continueBtn').on('click', function () {
     if($('#input-bar').val()){
         displayDesiredDestination();
         desiredDestinationStorage();
         populateSearchHistory();
         displayBudgetCard();
         callCurrAPI();
-    }else {$("#locationInfo").addClass('modal is-active')
-};
+    }else { $("#country-modal").addClass('is-active')
+    };
 })
 
-$("#modal-close").on('click', function(event){
-    $("#locationInfo").removeClass('is-active');
+$('#continueBtn').on('click', function () {
+    if($('#origin-bar').val()){
+        displayDesiredDestination();
+        desiredDestinationStorage();
+        populateSearchHistory();
+        displayBudgetCard();
+        callCurrAPI();
+    }else { $("#airport-modal").addClass('is-active')
+    };
+})
+
+$('#submitBtn').on('click', function () {
+    if($('#entire-budget-input').val()){
+        displayDesiredDestination();
+        desiredDestinationStorage();
+        populateSearchHistory();
+        displayBudgetCard();
+        callCurrAPI();
+    }else { $("#budget-modal").addClass('is-active')
+    };
+})
+
+$("#input-modal-close").on('click', function(event){
+    $("#country-modal").removeClass('is-active');
+    event.preventDefault();
+})
+
+$("#airport-modal-close").on('click', function(event){
+    $("#airport-modal").removeClass('is-active');
+    event.preventDefault();
+})
+
+$("#budget-modal-close").on('click', function(event){
+    $("#budget-modal").removeClass('is-active');
     event.preventDefault();
 })
 
