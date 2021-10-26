@@ -36,15 +36,31 @@
   </nav>
 
   <main>
+    <!-- initial info modal -->
+    <div id="starter-info" class="modal is-active">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <!-- Any other Bulma elements you want -->
+        <h5>A Note To The User:</h5>
+        <ul>
+          <li>For those ok going to anywhere in the country of choice.</li>
+          <li>Pricing is for the minimum flight price available for a round-trip.</li>
+          <li>Flights are found from airport of origin, using 3-letter airport codes.</li>
+        </ul>
+      </div>
+      <button id="close-button" class="modal-close is-large" aria-label="close"></button>
+    </div>
+
     <section class='columns m-3' id="input-section">
       <!-- Location Input-->
       <div id='location-input' class="card column is-half m-1">
         <div id='location-input-container'>
           <h3 class='title'>Where Would You Like To Go?</h3>
-          
+
           <label for="input-bar">Enter your desired vacation destination below:</label>
-          <input id='input-bar' class="input mb-5 is-success" type="text" placeholder="Anywhere except Antarctica... Much too cold.">
-          
+          <input id='input-bar' class="input mb-5 is-success" type="text"
+            placeholder="Anywhere except Antarctica... Much too cold.">
+
           <button class="button is-dark">Continue</button>
           <span id="destination-text"></span>
         </div>
@@ -56,15 +72,15 @@
         <div id="budget-inputs-container">
 
           <label for="entire-budget-input">What's your entire budget?</label>
-          <input  id='entire-budget-input' class="input mb-5 is-success" name='entire-budget' type="number"
+          <input id='entire-budget-input' class="input mb-5 is-success" name='entire-budget' type="number"
             placeholder="Flight, food, activities and all...">
 
           <label for="food-input">How much do you plan to spend on food?</label>
-          <input  id='food-input' class="input mb-5 is-success" name='food-budget' type="number"
+          <input id='food-input' class="input mb-5 is-success" name='food-budget' type="number"
             placeholder="Ordering in, eating out, or cooking in your hotel...">
 
           <label for="activities-input">How much do you plan to spend on activities and experiences?</label>
-          <input  id='activities-input' class="input mb-5 is-success" name='activities-budget' type="number"
+          <input id='activities-input' class="input mb-5 is-success" name='activities-budget' type="number"
             placeholder="You can't bring it with you when you die...">
 
           <button class="button is-dark is-one-quarter">Submit</button>
