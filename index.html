@@ -172,6 +172,7 @@
       </div>
       <button id="close-button" class="modal-close is-large" aria-label="close"></button>
     </div> -->
+
     <!-- initial info modal - card style-->
     <div id ='starter-info' class="modal is-active">
       <div class="modal-background"></div>
@@ -193,8 +194,8 @@
       </div>
     </div>
 
-    <!-- Request Error -->
-    <div id ='request-error-modal' class="modal">
+    <!-- Too Many Requests Error Flight API -->
+    <div id ='requests-error-modal' class="modal">
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
@@ -210,12 +211,12 @@
       </div>
     </div>
 
-    <!-- 404 Error Modal -->
+    <!-- 404 Error Modal Flight API -->
     <div id ='not-found-error-modal' class="modal">
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-          <p class="modal-card-title">Error - Too Many Requests</p>
+          <p class="modal-card-title">Error - 404 Not Found</p>
           <button class="delete" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
@@ -227,6 +228,28 @@
       </div>
     </div>
   </section>
+
+  <!-- 400 Error Modal ( Bad Request ) Flight API -->
+  <div id ='bad-request-error-modal' class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Error - Bad Request</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        Oops! Something went wrong, please try gain later.
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button">Close</button>
+      </footer>
+    </div>
+  </div>
+</section>
+
+
+
+
   <!-- Javascript files -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

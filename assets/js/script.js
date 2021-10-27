@@ -227,19 +227,18 @@ var callFlightAPI = function (countryCode, dataCurr, originAirportCode, leaveDat
 
             //Bad Request Error    
             } else if (response.status == 400) {
-                alert('bad request')
+                $('#bad-request-error-modal').addClass('is-block')
 
             }
         }
-    })
-    .catch(function(response){
-        console.error('error', response);
     })
     //clear input-bar
     .then(function(){
         $('#input-bar').val('')
     })
-    
+    .catch(function(response){
+        console.error('error', response);
+    })
 }
 
 var callCurrAPI = function () {
@@ -276,15 +275,23 @@ $('#budget-input').on('click', 'button', function () {
     budgetMath();
 })
 
-//too many request error modal button listener
+//too many request error modal button listener  for FlightAPI
 $('#request-error-modal').on('click', 'button', function(){
     $('#request-error-modal').removeClass('is-block')
 })
 
-//404 Error Modal 
+//404 Error Modal for FlightAPI
 $('#not-found-error-modal').on('click', 'button', function(){
     $('#not-found-error-modal').removeClass('is-block')
 })
+
+// 400 Error for FlightAPI
+$('#bad-request-error-modal').on('click', 'button', function(){
+    $('#bad-request-error-modal').removeClass('is-block')
+})
+
+
+
 //initial Modal that will let the user know quick information about the site, disappears and continues website load.
 $("#close-button").on("click", function () {
     $("#starter-info").removeClass("is-active");
