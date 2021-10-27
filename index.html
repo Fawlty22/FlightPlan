@@ -102,7 +102,7 @@
       </div>
     </section>
     <!-- Location Section -->
-    <section class='columns m-2' id='location-section'>
+    <section class='columns is-multiline m-2' id='location-section'>
       <!-- Card 1 -->
       <!-- <div class="card column m-1">
         <div class="card-content">
@@ -168,6 +168,41 @@
       </div> -->
     </section>
   </main>
+  <!-- Modal Section-->
+  <section id="modal-section">
+    <!-- Request Error -->
+    <div id ='request-error-modal' class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Error - Too Many Requests</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          Oops! It looks like the has been too many requests in the last minute.  Please wait a bit, then try again.
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button">Close</button>
+        </footer>
+      </div>
+    </div>
+    <!-- 404 Error Modal -->
+    <div id ='not-found-error-modal' class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Error - Too Many Requests</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          Oops! It looks like the requested page doesn't exist.  Please try a different input. 
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button">Close</button>
+        </footer>
+      </div>
+    </div>
+  </section>
   <!-- Javascript files -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

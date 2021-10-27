@@ -219,11 +219,15 @@ var callFlightAPI = function (countryCode, dataCurr, originAirportCode, leaveDat
         } else {    // errors
             //404 Error 
             if (response.status == 404) {
-                alert('not found')
+                $('#not-found-error-modal').addClass('is-block')
 
             //429 Too Many Requests Error 
             } else if (response.status == 429) {
-                alert('too many requests')
+                $('#request-error-modal').addClass('is-block')
+
+            //Bad Request Error    
+            } else if (response.status == 400) {
+                alert('bad request')
 
             }
         }
@@ -272,6 +276,15 @@ $('#budget-input').on('click', 'button', function () {
     budgetMath();
 })
 
+//too many request error modal button listener
+$('#request-error-modal').on('click', 'button', function(){
+    $('#request-error-modal').removeClass('is-block')
+})
+
+//404 Error Modal 
+$('#not-found-error-modal').on('click', 'button', function(){
+    $('#not-found-error-modal').removeClass('is-block')
+})
 //initial Modal that will let the user know quick information about the site, disappears and continues website load.
 $("#close-button").on("click", function () {
     $("#starter-info").removeClass("is-active");
