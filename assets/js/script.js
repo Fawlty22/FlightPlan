@@ -223,12 +223,11 @@ var callFlightAPI = function (countryCode, dataCurr, originAirportCode, leaveDat
 
             //429 Too Many Requests Error 
             } else if (response.status == 429) {
-                $('#request-error-modal').addClass('is-block')
+                $('#requests-error-modal').addClass('is-block')
 
             //Bad Request Error    
             } else if (response.status == 400) {
                 $('#bad-request-error-modal').addClass('is-block')
-
             }
         }
     })
@@ -250,8 +249,15 @@ var callCurrAPI = function () {
                     convertCountryInput(dataCurr)
                 }
                 )
-            } else {
-               alert('something went wrong, please try again later') 
+            } else {                    // Error Handling
+                //404 Error 
+                if (response.status == 404) {
+                    $('#not-found-error-modal').addClass('is-block')
+    
+                //Bad Request Error    
+                } else if (response.status == 400) {
+                    $('#bad-request-error-modal').addClass('is-block')
+                }
             }
         })
 }
@@ -276,8 +282,8 @@ $('#budget-input').on('click', 'button', function () {
 })
 
 //too many request error modal button listener  for FlightAPI
-$('#request-error-modal').on('click', 'button', function(){
-    $('#request-error-modal').removeClass('is-block')
+$('#requests-error-modal').on('click', 'button', function(){
+    $('#requests-error-modal').removeClass('is-block')
 })
 
 //404 Error Modal for FlightAPI
