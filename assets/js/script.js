@@ -216,7 +216,7 @@ var callFlightAPI = function (countryCode, dataCurr, originAirportCode, leaveDat
                 createCards(dataFlight, dataCurr);
             }
             )
-        } else {    // errors
+        } else {                            // Error Handling
             //404 Error 
             if (response.status == 404) {
                 $('#not-found-error-modal').addClass('is-block')
