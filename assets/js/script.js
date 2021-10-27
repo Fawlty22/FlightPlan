@@ -216,15 +216,26 @@ var callFlightAPI = function (countryCode, dataCurr, originAirportCode, leaveDat
                 createCards(dataFlight, dataCurr);
             }
             )
+        } else {    // errors
+            //404 Error 
+            if (response.status == 404) {
+                alert('not found')
+
+            //429 Too Many Requests Error 
+            } else if (response.status == 429) {
+                alert('too many requests')
+
+            }
         }
+    })
+    .catch(function(response){
+        console.error('error', response);
     })
     //clear input-bar
     .then(function(){
         $('#input-bar').val('')
     })
-    .catch(function(err){
-        console.error('error', err);
-    })
+    
 }
 
 var callCurrAPI = function () {
@@ -236,6 +247,8 @@ var callCurrAPI = function () {
                     convertCountryInput(dataCurr)
                 }
                 )
+            } else {
+               alert('something went wrong, please try again later') 
             }
         })
 }
