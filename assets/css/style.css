@@ -73,7 +73,8 @@ main{
 }
 
 #location-section {
-    display: none; 
+    display: none;
+    flex-flow:column wrap;
 }
 
 #location-input {

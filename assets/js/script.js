@@ -135,6 +135,7 @@ var budgetMath = function() {
 }
 
 var createCards = function(dataFlight, dataCurr) {
+    $("#location-section").addClass("is-flex");
     for (i = 0; i < dataFlight.Quotes.length; i++){
         var quoteID = dataFlight.Quotes[i].OutboundLeg.DestinationId
         //loop through the places array to convert destination ID into text
@@ -160,15 +161,27 @@ var createCards = function(dataFlight, dataCurr) {
         //make the media content div
         var mediaContent = $('<div>').addClass('media-content');
         //make the title using quoteID which is the city name of destination airport
-        var title = $('<p>').addClass('title is-4').text(quoteID)
+        var title = $('<p>').addClass('title is-4').text(quoteID);
         //make the content div 
-        var contentDiv = $('<div>').addClass('content')
+        var contentDiv = $('<div>').addClass('content');
         //make the h4's that hold flight price and currency conversion
-        var h4Price = $('<h4>').text('Price of Flight: $' + dataFlight.Quotes[i].MinPrice)
-        var h4Currency = $('<h4>').text('Currency Conversion Rate: 1 to ' + dataCurr.desiredConversion)
+        var h4Price = $('<h4>').text('Price of Flight: $' + dataFlight.Quotes[i].MinPrice);
+        var h4Currency = $('<h4>').text('Currency Conversion Rate: 1 to ' + dataCurr.desiredConversion);
+        var h4Carrier = $("<h4>").text("Carrier: " + dataFlight.Carriers[i].Name);
+
+        // displays if the flight is Direct or not.
+        if(dataFlight.Quotes[i].Direct){
+            var h4DirFlight = $("<h4>").text("This Flight is direct.")
+        } else {
+            var h4DirFlight = $("<h4>").text("This Flight is NOT direct.")
+        }
+
+
 
         //append h4's to contentDiv
-        contentDiv.append(h4Price)
+        contentDiv.append(h4Price);
+        contentDiv.append(h4Carrier);
+        contentDiv.append(h4DirFlight);
         contentDiv.append(h4Currency);
         //append image to figure
         // figure.append(image);
@@ -216,6 +229,19 @@ var callFlightAPI = function (countryCode, dataCurr, originAirportCode, leaveDat
                 createCards(dataFlight, dataCurr);
             }
             )
+        } else {                            // Error Handling
+            //404 Error 
+            if (response.status == 404) {
+                $('#not-found-error-modal').addClass('is-block')
+
+            //429 Too Many Requests Error 
+            } else if (response.status == 429) {
+                $('#requests-error-modal').addClass('is-block')
+
+            //Bad Request Error    
+            } else if (response.status == 400) {
+                $('#bad-request-error-modal').addClass('is-block')
+            }
         }
     })
     //clear input-bar
@@ -224,6 +250,11 @@ var callFlightAPI = function (countryCode, dataCurr, originAirportCode, leaveDat
     // })
     .catch(function(err){
         console.error('error', err);
+    .then(function(){
+        $('#input-bar').val('')
+    })
+    .catch(function(response){
+        console.error('error', response);
     })
 }
 
@@ -236,6 +267,15 @@ var callCurrAPI = function () {
                     convertCountryInput(dataCurr)
                 }
                 )
+            } else {                    // Error Handling
+                //404 Error 
+                if (response.status == 404) {
+                    $('#not-found-error-modal').addClass('is-block')
+    
+                //Bad Request Error    
+                } else if (response.status == 400) {
+                    $('#bad-request-error-modal').addClass('is-block')
+                }
             }
         })
 }
@@ -296,6 +336,23 @@ $('#budget-input').on('click', 'button', function () {
     displayLocationCards();
     budgetMath();
 })
+
+//too many request error modal button listener  for FlightAPI
+$('#requests-error-modal').on('click', 'button', function(){
+    $('#requests-error-modal').removeClass('is-block')
+})
+
+//404 Error Modal for FlightAPI
+$('#not-found-error-modal').on('click', 'button', function(){
+    $('#not-found-error-modal').removeClass('is-block')
+})
+
+// 400 Error for FlightAPI
+$('#bad-request-error-modal').on('click', 'button', function(){
+    $('#bad-request-error-modal').removeClass('is-block')
+})
+
+
 
 //initial Modal that will let the user know quick information about the site, disappears and continues website load.
 $("#close-button").on("click", function () {
