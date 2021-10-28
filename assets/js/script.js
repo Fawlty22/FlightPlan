@@ -315,21 +315,25 @@ $('#budget-input').on('click', 'button', function () {
 //too many request error modal button listener  for FlightAPI
 $('#requests-error-modal').on('click', 'button', function(){
     $('#requests-error-modal').removeClass('is-block')
+    location.reload();
 })
 
 //404 Error Modal for FlightAPI
 $('#not-found-error-modal').on('click', 'button', function(){
     $('#not-found-error-modal').removeClass('is-block')
+    location.reload();
 })
 
 // 400 Error for FlightAPI
 $('#bad-request-error-modal').on('click', 'button', function(){
     $('#bad-request-error-modal').removeClass('is-block')
+    location.reload();
 })
 
 //no flights modal event listener
 $('#no-flights-modal').on('click', 'button', function(){
     $('#no-flights-modal').removeClass('is-block')
+    location.reload();
 })
 
 
@@ -342,6 +346,7 @@ $("#close-button").on("click", function () {
 $("#search-history-button").on("click", function() {
     $("#dropdown-target-display").toggle();
 })
+
 
 //application initialization
 populateSearchHistory();
