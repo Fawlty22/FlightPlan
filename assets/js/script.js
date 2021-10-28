@@ -37,7 +37,7 @@ var populateSearchHistory = function(){
         const capitalizedDestination = searchHistory[i].charAt(0).toUpperCase() + searchHistory[i].slice(1);
         var searchedLocation = $('<button/>', {
             text: capitalizedDestination,
-            class: "button is-info navbar-item",
+            class: "button is-info dropdown item",
             click: function() {
                 const destination = $(this).text()
                 $('#input-bar').val(destination);
@@ -263,6 +263,10 @@ $('#budget-input').on('click', 'button', function () {
 $("#close-button").on("click", function () {
     $("#starter-info").removeClass("is-active");
     $("#input-section").addClass("is-flex");
+})
+
+$("#search-history-button").on("click", function() {
+    $("#dropdown-target-display").toggle();
 })
 
 //application initialization

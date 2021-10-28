@@ -24,14 +24,29 @@
 
       <h1 id="brand-title" class="navbar-item title mb-0">Flight Roulette</h1>
     </div>
-    <div class="navbar-item has-dropdown is-hoverable is-right m-6">
+    <!-- <div class="navbar-item has-dropdown is-hoverable is-right m-6"> -->
       <!-- Search history link -->
-      <a class="navbar-link navbar-item">
-        Search History
+      <!-- <a class="navbar-link navbar-item is-arrowless"> -->
+        <!-- Search History -->
       </a>
       <!-- Search history dropdown menu -->
-      <div id="search-history-list" class="navbar-dropdown is-right">
-        <button id="clear-search-history" class="navbar-item"></button>
+      <!-- <div id="search-history-list" class="navbar-dropdown dropdown-content"> -->
+        <!-- <button id="clear-search-history" class="navbar-item is-large"></button> -->
+      <!-- </div> -->
+    <!-- </div> -->
+    <div class="dropdown is-bottom m-5">
+      <div class="dropdown-trigger">
+        <button id="search-history-button" class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+          <span>Search History</span>
+        </button>
+      </div>
+      <div id="dropdown-target-display" class="dropdown-menu" id="dropdown-menu" role="menu">
+        <div id="search-history-list" class="dropdown-content">
+          <hr class="dropdown-divider">
+          <button id="clear-search-history" href="#" class="button dropdown-item">
+            Clear Search History
+          </button>
+        </div>
       </div>
     </div>
 
