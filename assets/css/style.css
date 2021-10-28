@@ -82,13 +82,18 @@ main{
 
 #location-section {
     display: none;
-    flex-flow:column wrap;
+    justify-content: space-evenly;
+
 }
 
 #location-input {
 /* display: flex;
 align-items: center;
 justify-content: center; */  
+}
+
+.location-card {
+    /* overflow-wrap: break-word; */
 }
 
 #location-input-container h3 {

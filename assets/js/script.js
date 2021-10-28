@@ -160,7 +160,7 @@ var createCards = function(dataFlight, dataCurr) {
         }
 
         //make the main card div
-        var card = $('<div>').addClass('card column m-1');
+        var card = $('<div>').addClass('card column location-card is-one-third is-full-mobile mb-4');
         //make the card-content div
         var cardContent = $('<div>') .addClass('card-content');
         //make the media div
@@ -175,7 +175,7 @@ var createCards = function(dataFlight, dataCurr) {
         //make the media content div
         var mediaContent = $('<div>').addClass('media-content');
         //make the title using quoteID which is the city name of destination airport
-        var title = $('<p>').addClass('title is-4').text(quoteID);
+        var title = $('<p>').addClass('title is-3').text(quoteID);
         //make the content div 
         var contentDiv = $('<div>').addClass('content');
         //make the h4's that hold flight price
