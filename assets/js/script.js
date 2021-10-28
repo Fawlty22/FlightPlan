@@ -135,7 +135,6 @@ var budgetMath = function() {
 }
 
 var createCards = function(dataFlight, dataCurr) {
-    $("#location-section").addClass("is-flex");
     for (i = 0; i < dataFlight.Quotes.length; i++){
         var quoteID = dataFlight.Quotes[i].OutboundLeg.DestinationId
         //loop through the places array to convert destination ID into text
@@ -161,27 +160,15 @@ var createCards = function(dataFlight, dataCurr) {
         //make the media content div
         var mediaContent = $('<div>').addClass('media-content');
         //make the title using quoteID which is the city name of destination airport
-        var title = $('<p>').addClass('title is-4').text(quoteID);
+        var title = $('<p>').addClass('title is-4').text(quoteID)
         //make the content div 
-        var contentDiv = $('<div>').addClass('content');
+        var contentDiv = $('<div>').addClass('content')
         //make the h4's that hold flight price and currency conversion
-        var h4Price = $('<h4>').text('Price of Flight: $' + dataFlight.Quotes[i].MinPrice);
-        var h4Currency = $('<h4>').text('Currency Conversion Rate: 1 to ' + dataCurr.desiredConversion);
-        var h4Carrier = $("<h4>").text("Carrier: " + dataFlight.Carriers[i].Name);
-
-        // displays if the flight is Direct or not.
-        if(dataFlight.Quotes[i].Direct){
-            var h4DirFlight = $("<h4>").text("This Flight is direct.")
-        } else {
-            var h4DirFlight = $("<h4>").text("This Flight is NOT direct.")
-        }
-
-
+        var h4Price = $('<h4>').text('Price of Flight: $' + dataFlight.Quotes[i].MinPrice)
+        var h4Currency = $('<h4>').text('Currency Conversion Rate: 1 to ' + dataCurr.desiredConversion)
 
         //append h4's to contentDiv
-        contentDiv.append(h4Price);
-        contentDiv.append(h4Carrier);
-        contentDiv.append(h4DirFlight);
+        contentDiv.append(h4Price)
         contentDiv.append(h4Currency);
         //append image to figure
         // figure.append(image);
