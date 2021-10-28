@@ -213,7 +213,7 @@
         <section class="modal-card-body">
           <h5>A Note To The User:</h5>
         <ul>
-          <li>For those ok going to anywhere in the country of choice.</li>
+          <li>This app is intended for international travel only.</li>
           <li>Pricing is for the minimum flight price available for a round-trip.</li>
           <li>Flights are found from airport of origin, using 3-letter airport codes.</li>
         </ul>
@@ -257,24 +257,43 @@
         </footer>
       </div>
     </div>
-  </section>
+  
 
-  <!-- 400 Error Modal ( Bad Request ) Flight API -->
-  <div id ='bad-request-error-modal' class="modal">
-    <div class="modal-background"></div>
-    <div class="modal-card">
-      <header class="modal-card-head">
-        <p class="modal-card-title">Error - Bad Request</p>
-        <button class="delete" aria-label="close"></button>
-      </header>
-      <section class="modal-card-body">
-        Oops! Something went wrong, please try again later.
-      </section>
-      <footer class="modal-card-foot">
-        <button class="button">Close</button>
-      </footer>
+    <!-- 400 Error Modal ( Bad Request ) Flight API -->
+    <div id ='bad-request-error-modal' class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Error - Bad Request</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          Oops! Something went wrong, please try again later.
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button">Close</button>
+        </footer>
+      </div>
     </div>
-  </div>
+
+    <!-- No Flights Modal Flight API -->
+    <div id='no-flights-modal' class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">There are no flights to this location.</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          Please try a different country.
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button">Close</button>
+        </footer>
+      </div>
+    </div>
+
+
 </section>
 
 
