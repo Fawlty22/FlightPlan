@@ -67,6 +67,14 @@ main{
 #budget-input {
     display: none;
 }
+#converted-budget {
+    display: none;
+}
+
+#budget-holder h4 {
+    margin: 20px auto 30px 10px;
+    font-size: 20px;
+}
 
 #budget-input h3 {
     text-align: center;

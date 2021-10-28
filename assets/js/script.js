@@ -1,6 +1,7 @@
 var data = [];
 var searchHistory = JSON.parse(localStorage.getItem("search-history")) || [];
-const exchangeAPIKey = "10a0a9e87b4e3dfb6a11dfe5"
+const exchangeAPIKey = "10a0a9e87b4e3dfb6a11dfe5";
+var currencyVariable;
 
 
 
@@ -90,7 +91,7 @@ var convertToCurrencyVariable = function (dataCurr) {
     //loop through the array and find the matching country code, then grab the conversion rate
     for (i = 0; i < dataCurr.array_conversion_rates.length; i++) {
         if (dataCurr.currency_code == dataCurr.array_conversion_rates[i][0]) {
-            var currencyVariable = dataCurr.array_conversion_rates[i][1]
+            currencyVariable = dataCurr.array_conversion_rates[i][1]
             dataCurr.desiredConversion = currencyVariable
             console.log('currencyVariable', currencyVariable)
             break;
@@ -122,15 +123,28 @@ var convertToCountryCode = function(dataCurr){
     }
 }
 
+//makes card to dsiplay budget in converted currenct
+var convertedBudgetCard = function(entireBudget, foodNumber, activitiesNumber) {
+    $("#converted-budget").addClass("is-flex");
+    $("#budget-input").removeClass("is-flex");
+    $("#budget-input").addClass("is-hidden");
+
+    $("#total-span").text(entireBudget * currencyVariable);
+    $("#food-span").text(foodNumber * currencyVariable);
+    $("#activity-span").text(activitiesNumber * currencyVariable);
+}
+
 //budget math function
 var budgetMath = function() {
     var entireBudget = Number($('#entire-budget-input').val());
     var foodNumber = Number($('#food-input').val());
     var activitiesNumber = Number($('#activities-input').val());
     
-    var budgetForFlight = Number(entireBudget - (foodNumber + activitiesNumber));
-    
-    $('#budget-text').text('Great! That leaves $' + budgetForFlight + ' for your flight.')
+    //var budgetForFlight = Number(entireBudget - (foodNumber + activitiesNumber));
+
+    convertedBudgetCard(entireBudget, foodNumber, activitiesNumber);
+
+    //$('#budget-text').text('Great! That leaves $' + budgetForFlight + ' for your flight.')
 
 }
 
@@ -164,9 +178,8 @@ var createCards = function(dataFlight, dataCurr) {
         var title = $('<p>').addClass('title is-4').text(quoteID);
         //make the content div 
         var contentDiv = $('<div>').addClass('content');
-        //make the h4's that hold flight price and currency conversion
+        //make the h4's that hold flight price
         var h4Price = $('<h4>').text('Price of Flight: $' + dataFlight.Quotes[i].MinPrice);
-        var h4Currency = $('<h4>').text('Currency Conversion Rate: 1 to ' + dataCurr.desiredConversion);
         var h4Carrier = $("<h4>").text("Carrier: " + dataFlight.Carriers[i].Name);
 
         // displays if the flight is Direct or not.
@@ -182,7 +195,6 @@ var createCards = function(dataFlight, dataCurr) {
         contentDiv.append(h4Price);
         contentDiv.append(h4Carrier);
         contentDiv.append(h4DirFlight);
-        contentDiv.append(h4Currency);
         //append image to figure
         // figure.append(image);
         //append figure to mediaLeftDiv
