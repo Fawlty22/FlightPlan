@@ -135,7 +135,7 @@ var budgetMath = function() {
 }
 
 var createCards = function(dataFlight, dataCurr) {
-    $("#location-section").addClass("is-flex");
+    
     for (i = 0; i < dataFlight.Quotes.length; i++){
         var quoteID = dataFlight.Quotes[i].OutboundLeg.DestinationId
         //loop through the places array to convert destination ID into text
@@ -290,6 +290,7 @@ $('#location-input').on('click', 'button', function () {
 })
 
 $('#budget-input').on('click', 'button', function () {
+    $("#location-section").addClass("is-flex");
     displayLocationCards();
     budgetMath();
 })
