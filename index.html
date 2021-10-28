@@ -36,21 +36,6 @@
   </nav>
 
   <main>
-    <!-- initial info modal -->
-    <div id="starter-info" class="modal is-active">
-      <div class="modal-background"></div>
-      <div class="modal-content">
-        <!-- Any other Bulma elements you want -->
-        <h5>A Note To The User:</h5>
-        <ul>
-          <li>For those ok going to anywhere in the country of choice.</li>
-          <li>Pricing is for the minimum flight price available for a round-trip.</li>
-          <li>Flights are found from airport of origin, using 3-letter airport codes.</li>
-        </ul>
-      </div>
-      <button id="close-button" class="modal-close is-large" aria-label="close"></button>
-    </div>
-
     <section class='columns m-3' id="input-section">
       <!-- Location Input-->
       <div id='location-input' class="card column is-half m-1">
@@ -101,8 +86,9 @@
 
       </div>
     </section>
+
     <!-- Location Section -->
-    <section class='columns m-2' id='location-section'>
+    <section class='columns is-multiline m-2' id='location-section'>
       <!-- Card 1 -->
       <!-- <div class="card column m-1">
         <div class="card-content">
@@ -168,6 +154,102 @@
       </div> -->
     </section>
   </main>
+
+  <!-- Modal Section-->
+  <section id="modal-section">
+
+    <!-- initial info modal - window style -->
+    <!-- <div id="starter-info" class="modal is-active">
+      <div class="modal-background"></div>
+      <div class="modal-content"> -->
+        <!-- Any other Bulma elements you want -->
+        <!-- <h5>A Note To The User:</h5>
+        <ul>
+          <li>For those ok going to anywhere in the country of choice.</li>
+          <li>Pricing is for the minimum flight price available for a round-trip.</li>
+          <li>Flights are found from airport of origin, using 3-letter airport codes.</li>
+        </ul>
+      </div>
+      <button id="close-button" class="modal-close is-large" aria-label="close"></button>
+    </div> -->
+
+    <!-- initial info modal - card style-->
+    <div id ='starter-info' class="modal is-active">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Welcome to Flight Roulette</p>
+        </header>
+        <section class="modal-card-body">
+          <h5>A Note To The User:</h5>
+        <ul>
+          <li>For those ok going to anywhere in the country of choice.</li>
+          <li>Pricing is for the minimum flight price available for a round-trip.</li>
+          <li>Flights are found from airport of origin, using 3-letter airport codes.</li>
+        </ul>
+        </section>
+        <footer class="modal-card-foot">
+          <button id ='close-button' class="button">Close</button>
+        </footer>
+      </div>
+    </div>
+
+    <!-- Too Many Requests Error Flight API -->
+    <div id ='requests-error-modal' class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Error - Too Many Requests</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          Oops! It looks like the has been too many requests in the last minute.  Please wait a bit, then try again.
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button">Close</button>
+        </footer>
+      </div>
+    </div>
+
+    <!-- 404 Error Modal Flight API -->
+    <div id ='not-found-error-modal' class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Error - 404 Not Found</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          Oops! It looks like the requested page doesn't exist.  Please try a different input. 
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button">Close</button>
+        </footer>
+      </div>
+    </div>
+  </section>
+
+  <!-- 400 Error Modal ( Bad Request ) Flight API -->
+  <div id ='bad-request-error-modal' class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Error - Bad Request</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        Oops! Something went wrong, please try again later.
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button">Close</button>
+      </footer>
+    </div>
+  </div>
+</section>
+
+
+
+
   <!-- Javascript files -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

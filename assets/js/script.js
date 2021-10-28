@@ -229,14 +229,27 @@ var callFlightAPI = function (countryCode, dataCurr, originAirportCode, leaveDat
                 createCards(dataFlight, dataCurr);
             }
             )
+        } else {                            // Error Handling
+            //404 Error 
+            if (response.status == 404) {
+                $('#not-found-error-modal').addClass('is-block')
+
+            //429 Too Many Requests Error 
+            } else if (response.status == 429) {
+                $('#requests-error-modal').addClass('is-block')
+
+            //Bad Request Error    
+            } else if (response.status == 400) {
+                $('#bad-request-error-modal').addClass('is-block')
+            }
         }
     })
     //clear input-bar
     .then(function(){
         $('#input-bar').val('')
     })
-    .catch(function(err){
-        console.error('error', err);
+    .catch(function(response){
+        console.error('error', response);
     })
 }
 
@@ -249,6 +262,15 @@ var callCurrAPI = function () {
                     convertCountryInput(dataCurr)
                 }
                 )
+            } else {                    // Error Handling
+                //404 Error 
+                if (response.status == 404) {
+                    $('#not-found-error-modal').addClass('is-block')
+    
+                //Bad Request Error    
+                } else if (response.status == 400) {
+                    $('#bad-request-error-modal').addClass('is-block')
+                }
             }
         })
 }
@@ -271,6 +293,23 @@ $('#budget-input').on('click', 'button', function () {
     displayLocationCards();
     budgetMath();
 })
+
+//too many request error modal button listener  for FlightAPI
+$('#requests-error-modal').on('click', 'button', function(){
+    $('#requests-error-modal').removeClass('is-block')
+})
+
+//404 Error Modal for FlightAPI
+$('#not-found-error-modal').on('click', 'button', function(){
+    $('#not-found-error-modal').removeClass('is-block')
+})
+
+// 400 Error for FlightAPI
+$('#bad-request-error-modal').on('click', 'button', function(){
+    $('#bad-request-error-modal').removeClass('is-block')
+})
+
+
 
 //initial Modal that will let the user know quick information about the site, disappears and continues website load.
 $("#close-button").on("click", function () {
