@@ -62,24 +62,7 @@
           <span id="destination-text"></span>
         </div>
       </div>
-      <div class="modal" id="country-modal">
-        <div class="modal-background"></div>
-        <div class="modal-content">
-          <div class="box">
-            <h1>Please make sure you have filled in all necessary information.</h1>
-          </div>
-        </div>
-        <button id="input-modal-close" class="modal-close is-large" aria-label="close"></button>
-      </div>
-      <div class="modal" id="airport-modal">
-        <div class="modal-background"></div>
-        <div class="modal-content">
-          <div class="box">
-            <h1>Please make sure you have filled in a three letter airport code.</h1>
-          </div>
-        </div>
-        <button id="airport-modal-close" class="modal-close is-large" aria-label="close"></button>
-      </div>
+    
       <!-- Budget Input Card-->
       <div id='budget-input' class="card column is-half m-1">
         <h3 class='title'>How Much You Got?</h3>
@@ -103,15 +86,7 @@
         </div>
 
       </div>
-      <div class="modal" id="budget-modal">
-        <div class="modal-background"></div>
-        <div class="modal-content">
-          <div class="box">
-            <h1>Please make sure you have filled in a budget.</h1>
-          </div>
-        </div>
-        <button id="budget-modal-close" class="modal-close is-large" aria-label="close"></button>
-      </div>
+      
     </section>
 
     <!-- Location Section -->
@@ -274,6 +249,38 @@
   </div>
 </section>
 
+<!-- Flight Input Modals (not entering all inputs) -->
+<div id ='country-modal' class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Missing or Incorrect Information</p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      Oops! It looks like there is missing or incorrect information. Please make sure all information is filled in and correct.
+    </section>
+    <footer class="modal-card-foot">
+      <button id="input-modal-close" class="button">Close</button>
+    </footer>
+  </div>
+</div>
+
+<div id ='budget-modal' class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Missing Information</p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      Oops! It looks like there is missing information. Please make sure all information is filled in.
+    </section>
+    <footer class="modal-card-foot">
+      <button id="budget-modal-close" class="button">Close</button>
+    </footer>
+  </div>
+</div>
 
 
 

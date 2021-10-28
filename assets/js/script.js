@@ -135,7 +135,7 @@ var budgetMath = function() {
 }
 
 var createCards = function(dataFlight, dataCurr) {
-    $("#location-section").addClass("is-flex");
+    
     for (i = 0; i < dataFlight.Quotes.length; i++){
         var quoteID = dataFlight.Quotes[i].OutboundLeg.DestinationId
         //loop through the places array to convert destination ID into text
@@ -250,13 +250,14 @@ var callFlightAPI = function (countryCode, dataCurr, originAirportCode, leaveDat
     // })
     .catch(function(err){
         console.error('error', err);
-    .then(function(){
-        $('#input-bar').val('')
     })
+    // .then(function(){
+    //     $('#input-bar').val('')
+    // })
     .catch(function(response){
         console.error('error', response);
     })
-}
+};
 
 var callCurrAPI = function () {
     //API call for currency conversion
@@ -287,15 +288,28 @@ var callCurrAPI = function () {
 
 //event listeners for input modals
 $('#continueBtn').on('click', function () {
-    if($('#input-bar, #origin-bar').val()){
+    if($('#input-bar').val() && $("#origin-bar").val() && $("#date-bar-return").val() && $("#date-bar-depart").val()){
         displayDesiredDestination();
         desiredDestinationStorage();
         populateSearchHistory();
         displayBudgetCard();
         callCurrAPI();
-    } else {$("#origin-bar").val()
+    }else { 
+        if (!$('#input-bar').val()){
         $("#country-modal").addClass('is-active')
+        } else {(!$('#origin-bar').val()) 
+            $("#country-modal").addClass('is-active')
+        }
     };
+});
+
+$('#submitBtn').on('click', function () {
+    if($('#entire-budget-input').val() && $("#food-input").val() && $("#activities-input").val()){
+        displayBudgetCard();
+        callCurrAPI();
+    }else { 
+        $("#budget-modal").addClass('is-active')
+        }
 });
 
 // $('#continueBtn').on('click', function () {
@@ -309,13 +323,13 @@ $('#continueBtn').on('click', function () {
 //     };
 // })$("#country-modal").addClass('is-active')
 
-$('#submitBtn').on('click', function () {
-    if($('#entire-budget-input').val()){
-        displayBudgetCard();
-        callCurrAPI();
-    }else { $("#budget-modal").addClass('is-active')
-    };
-})
+// $('#submitBtn').on('click', function () {
+//     if($('#entire-budget-input').val()){
+//         displayBudgetCard();
+//         callCurrAPI();
+//     }else { $("#budget-modal").addClass('is-active')
+//     };
+// })
 
 $("#input-modal-close").on('click', function(event){
     $("#country-modal").removeClass('is-active');
@@ -333,6 +347,7 @@ $("#budget-modal-close").on('click', function(event){
 })
 
 $('#budget-input').on('click', 'button', function () {
+    $("#location-section").addClass("is-flex");
     displayLocationCards();
     budgetMath();
 })
