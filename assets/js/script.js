@@ -247,32 +247,30 @@ var callCurrAPI = function () {
 
 //event listeners for input modals
 $('#continueBtn').on('click', function () {
-    if($('#input-bar').val()){
+    if($('#input-bar, #origin-bar').val()){
         displayDesiredDestination();
         desiredDestinationStorage();
         populateSearchHistory();
         displayBudgetCard();
         callCurrAPI();
-    }else { $("#country-modal").addClass('is-active')
+    } else {$("#origin-bar").val()
+        $("#country-modal").addClass('is-active')
     };
-})
+});
 
-$('#continueBtn').on('click', function () {
-    if($('#origin-bar').val()){
-        displayDesiredDestination();
-        desiredDestinationStorage();
-        populateSearchHistory();
-        displayBudgetCard();
-        callCurrAPI();
-    }else { $("#airport-modal").addClass('is-active')
-    };
-})
+// $('#continueBtn').on('click', function () {
+//     if($('#origin-bar').val()){
+//         displayDesiredDestination();
+//         desiredDestinationStorage();
+//         populateSearchHistory();
+//         displayBudgetCard();
+//         callCurrAPI();
+//     }else { 
+//     };
+// })$("#country-modal").addClass('is-active')
 
 $('#submitBtn').on('click', function () {
     if($('#entire-budget-input').val()){
-        displayDesiredDestination();
-        desiredDestinationStorage();
-        populateSearchHistory();
         displayBudgetCard();
         callCurrAPI();
     }else { $("#budget-modal").addClass('is-active')
