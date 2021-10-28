@@ -85,7 +85,7 @@ justify-content: center; */
 }
 
 .location-card {
-    overflow-wrap: break-word;
+    /* overflow-wrap: break-word; */
 }
 
 #location-input-container h3 {
