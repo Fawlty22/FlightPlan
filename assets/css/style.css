@@ -67,6 +67,14 @@ main{
 #budget-input {
     display: none;
 }
+#converted-budget {
+    display: none;
+}
+
+#budget-holder h4 {
+    margin: 20px auto 30px 10px;
+    font-size: 20px;
+}
 
 #budget-input h3 {
     text-align: center;
@@ -74,13 +82,18 @@ main{
 
 #location-section {
     display: none;
-    flex-flow:column wrap;
+    justify-content: space-evenly;
+
 }
 
 #location-input {
 /* display: flex;
 align-items: center;
 justify-content: center; */  
+}
+
+.location-card {
+    /* overflow-wrap: break-word; */
 }
 
 #location-input-container h3 {
@@ -101,4 +114,42 @@ img {
 
 #date-container {
     display:flex;
+}
+
+@media screen and (min-width: 600px){
+    .navbar-dropdown {
+        background-color: var skyblue;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+        border-top: 2px solid #dbdbdb;
+        box-shadow: 0 8px 8px rgb(10 10 10 / 10%);
+        display: none;
+        font-size: .875rem;
+        left: 0;
+        min-width: 100%;
+        position: absolute;
+        top: 100%;
+        z-index: 20;
+        align-items: center;
+    }
+}
+
+@media screen and (min-width: 1024px){
+    .navbar-item, .navbar-link {
+        align-items: center;
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .navbar {
+        min-height: 3.25rem;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .navbar, .navbar-end, .navbar-menu, .navbar-start {
+        align-items: stretch;
+        display: flex;
+    }
 }
