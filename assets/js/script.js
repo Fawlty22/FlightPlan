@@ -132,6 +132,7 @@ var convertedBudgetCard = function(entireBudget, foodNumber, activitiesNumber) {
     $("#total-span").text(entireBudget * currencyVariable);
     $("#food-span").text(foodNumber * currencyVariable);
     $("#activity-span").text(activitiesNumber * currencyVariable);
+    console.log()
 }
 
 //budget math function
@@ -236,7 +237,11 @@ var callFlightAPI = function (countryCode, dataCurr, originAirportCode, leaveDat
     .then(function (response) {
         if (response.ok) {
             response.json().then(function (dataFlight) {
-                
+                //if No Flights, Modal Shows
+                if (dataFlight.Quotes.length === 0) {
+                    $('#no-flights-modal').addClass('is-block')
+                }
+
                 console.log('dataFlight', dataFlight)
                 createCards(dataFlight, dataCurr);
             }
@@ -253,7 +258,7 @@ var callFlightAPI = function (countryCode, dataCurr, originAirportCode, leaveDat
             //Bad Request Error    
             } else if (response.status == 400) {
                 $('#bad-request-error-modal').addClass('is-block')
-            }
+            }  
         }
     })
     //clear input-bar
@@ -310,18 +315,26 @@ $('#budget-input').on('click', 'button', function () {
 //too many request error modal button listener  for FlightAPI
 $('#requests-error-modal').on('click', 'button', function(){
     $('#requests-error-modal').removeClass('is-block')
+    location.reload();
 })
 
 //404 Error Modal for FlightAPI
 $('#not-found-error-modal').on('click', 'button', function(){
     $('#not-found-error-modal').removeClass('is-block')
+    location.reload();
 })
 
 // 400 Error for FlightAPI
 $('#bad-request-error-modal').on('click', 'button', function(){
     $('#bad-request-error-modal').removeClass('is-block')
+    location.reload();
 })
 
+//no flights modal event listener
+$('#no-flights-modal').on('click', 'button', function(){
+    $('#no-flights-modal').removeClass('is-block')
+    location.reload();
+})
 
 
 //initial Modal that will let the user know quick information about the site, disappears and continues website load.
@@ -333,6 +346,7 @@ $("#close-button").on("click", function () {
 $("#search-history-button").on("click", function() {
     $("#dropdown-target-display").toggle();
 })
+
 
 //application initialization
 populateSearchHistory();
