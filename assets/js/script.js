@@ -292,8 +292,20 @@ var callCurrAPI = function () {
         })
 }
 
-
-
+//check if the checkbox is checked...wait what? This is going to verify whether or not it's checked, and add 'visited' to localstorage
+var validateCheckbox = function () {
+    if (document.getElementById('start-checkbox').checked){
+        localStorage.setItem('FlightRouletteVisited', 'visited')
+    }
+    
+}
+//if localstorage has 'FlightRouletteVisited', don't show initial modal
+var hideInitialModal = function() {
+    if (localStorage.getItem('FlightRouletteVisited')){
+        $('#starter-info').removeClass('is-active')
+        $("#input-section").addClass("is-flex");
+    }
+}
 
 
 
@@ -339,6 +351,8 @@ $('#no-flights-modal').on('click', 'button', function(){
 
 //initial Modal that will let the user know quick information about the site, disappears and continues website load.
 $("#close-button").on("click", function () {
+    validateCheckbox();
+
     $("#starter-info").removeClass("is-active");
     $("#input-section").addClass("is-flex");
 })
@@ -349,4 +363,5 @@ $("#search-history-button").on("click", function() {
 
 
 //application initialization
+hideInitialModal();
 populateSearchHistory();
