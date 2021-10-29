@@ -1,4 +1,7 @@
 var data = [];
+var entireBudget = 0;
+var foodNumber = 0;
+var activitiesNumber = 0;
 var searchHistory = JSON.parse(localStorage.getItem("search-history")) || [];
 const exchangeAPIKey = "10a0a9e87b4e3dfb6a11dfe5";
 var currencyVariable;
@@ -17,6 +20,16 @@ var displayBudgetCard = function () {
 
 var displayLocationCards = function () {
     $('#location-section').addClass('is-flex')
+    
+    //Loop over cards in location-section and display none if flight price exceeds entireBudget
+    for (i=0; i<$('#location-section').children('div').length; i++) {
+        // get flight price from h4 element in card.
+        var flightPrice = $($($($('#location-section').children('div')[i]).children('div')[0]).children('div')[1]).children('h4')[0].innerText.split('$')[1]
+        var budgetForFlight = entireBudget-foodNumber-activitiesNumber
+        if(flightPrice>budgetForFlight){
+            $($('#location-section').children('div')[i]).addClass("display-none")
+        }
+    }
 }
 
 //changes span element to display the location that was searched for
@@ -77,8 +90,6 @@ var convertCountryInput = function (dataCurr) {
             var resultArray = Object.entries(dataArray);
             //add it to object as well
             dataCurr.array_conversion_rates = resultArray
-
-            console.log('dataCurr', dataCurr)
             convertToCurrencyVariable(dataCurr);
             convertToCountryCode(dataCurr);
             break;
@@ -93,7 +104,6 @@ var convertToCurrencyVariable = function (dataCurr) {
         if (dataCurr.currency_code == dataCurr.array_conversion_rates[i][0]) {
             currencyVariable = dataCurr.array_conversion_rates[i][1]
             dataCurr.desiredConversion = currencyVariable
-            console.log('currencyVariable', currencyVariable)
             break;
         }
     }
@@ -114,7 +124,6 @@ var convertToCountryCode = function(dataCurr){
     for (i = 0; i < countryCodesArray.length; i++){
         if (countryCodesArray[i].name.toLowerCase().includes(desiredLocation.toLowerCase())) {
             var countryCode = countryCodesArray[i].code;
-            console.log('countryCode', countryCode)
 
             
             callFlightAPI(countryCode, dataCurr, originAirportCode, leaveDate, returnDate);
@@ -123,7 +132,7 @@ var convertToCountryCode = function(dataCurr){
     }
 }
 
-//makes card to dsiplay budget in converted currenct
+//makes card to display budget in converted currency
 var convertedBudgetCard = function(entireBudget, foodNumber, activitiesNumber) {
     $("#converted-budget").addClass("is-flex");
     $("#budget-input").removeClass("is-flex");
@@ -136,9 +145,9 @@ var convertedBudgetCard = function(entireBudget, foodNumber, activitiesNumber) {
 
 //budget math function
 var budgetMath = function() {
-    var entireBudget = Number($('#entire-budget-input').val());
-    var foodNumber = Number($('#food-input').val());
-    var activitiesNumber = Number($('#activities-input').val());
+    entireBudget = Number($('#entire-budget-input').val());
+    foodNumber = Number($('#food-input').val());
+    activitiesNumber = Number($('#activities-input').val());
     
     //var budgetForFlight = Number(entireBudget - (foodNumber + activitiesNumber));
 
@@ -303,8 +312,8 @@ $('#location-input').on('click', 'button', function () {
 
 $('#budget-input').on('click', 'button', function () {
     $("#location-section").addClass("is-flex");
-    displayLocationCards();
     budgetMath();
+    displayLocationCards();
 })
 
 //too many request error modal button listener  for FlightAPI
