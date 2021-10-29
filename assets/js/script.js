@@ -2,6 +2,7 @@ var data = [];
 var searchHistory = JSON.parse(localStorage.getItem("search-history")) || [];
 const exchangeAPIKey = "10a0a9e87b4e3dfb6a11dfe5";
 var currencyVariable;
+var currencyData;
 
 
 
@@ -124,15 +125,16 @@ var convertToCountryCode = function(dataCurr){
 }
 
 //makes card to dsiplay budget in converted currenct
-var convertedBudgetCard = function(entireBudget, foodNumber, activitiesNumber) {
+var convertedBudgetCard = function(entireBudget, foodNumber, activitiesNumber, budgetForFlight) {
     $("#converted-budget").addClass("is-flex");
     $("#budget-input").removeClass("is-flex");
     $("#budget-input").addClass("is-hidden");
 
-    $("#total-span").text(entireBudget * currencyVariable);
-    $("#food-span").text(foodNumber * currencyVariable);
-    $("#activity-span").text(activitiesNumber * currencyVariable);
-    console.log()
+    $("#total-span").text(currencyData.currency_code + " " + entireBudget * currencyVariable);
+    $("#food-span").text(currencyData.currency_code + " " + foodNumber * currencyVariable);
+    $("#activity-span").text(currencyData.currency_code + " " + activitiesNumber * currencyVariable);
+    $("#flight-span").text("USD $" + budgetForFlight);
+
 }
 
 //budget math function
@@ -141,9 +143,9 @@ var budgetMath = function() {
     var foodNumber = Number($('#food-input').val());
     var activitiesNumber = Number($('#activities-input').val());
     
-    //var budgetForFlight = Number(entireBudget - (foodNumber + activitiesNumber));
+    var budgetForFlight = Number(entireBudget - (foodNumber + activitiesNumber));
 
-    convertedBudgetCard(entireBudget, foodNumber, activitiesNumber);
+    convertedBudgetCard(entireBudget, foodNumber, activitiesNumber, budgetForFlight);
 
     //$('#budget-text').text('Great! That leaves $' + budgetForFlight + ' for your flight.')
 
@@ -276,6 +278,7 @@ var callCurrAPI = function () {
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (dataCurr) {
+                    currencyData = dataCurr;
                     convertCountryInput(dataCurr)
                 }
                 )
