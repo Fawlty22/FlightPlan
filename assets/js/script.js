@@ -138,6 +138,8 @@ var convertedBudgetCard = function(entireBudget, foodNumber, activitiesNumber) {
     $("#converted-budget").addClass("is-flex");
     $("#budget-input").removeClass("is-flex");
     $("#budget-input").addClass("is-hidden");
+    var budgetForFlight = Number(entireBudget - (foodNumber + activitiesNumber));
+
 
     $("#total-span").text(currencyData.currency_code + " " + entireBudget * currencyVariable);
     $("#food-span").text(currencyData.currency_code + " " + foodNumber * currencyVariable);
@@ -276,16 +278,10 @@ var callFlightAPI = function (countryCode, dataCurr, originAirportCode, leaveDat
     // .then(function(){
     //     $('#input-bar').val('')
     // })
-    .catch(function(err){
-        console.error('error', err);
-    })
-    // .then(function(){
-    //     $('#input-bar').val('')
-    // })
     .catch(function(response){
         console.error('error', response);
     })
-};
+}
 
 var callCurrAPI = function () {
     //API call for currency conversion
@@ -327,12 +323,21 @@ var hideInitialModal = function() {
 
 
 
-//event listeners for input modals
+//event listeners
+// $('#location-input').on('click', 'button', function () {
+//     displayDesiredDestination();
+//     desiredDestinationStorage();
+//     populateSearchHistory();
+//     callCurrAPI();
+//     displayBudgetCard();
+// })
 $('#continueBtn').on('click', function () {
     if($('#input-bar').val() && $("#origin-bar").val() && $("#date-bar-return").val() && $("#date-bar-depart").val()){
         displayDesiredDestination();
         desiredDestinationStorage();
         populateSearchHistory();
+        callCurrAPI();
+        displayBudgetCard();
     }else { 
         $("#country-modal").addClass('is-active')
     };
@@ -340,8 +345,11 @@ $('#continueBtn').on('click', function () {
 
 $('#submitBtn').on('click', function () {
     if($('#entire-budget-input').val() && $("#food-input").val() && $("#activities-input").val()){
-        displayBudgetCard();
-        callCurrAPI();
+        // displayBudgetCard();
+        // callCurrAPI();
+        $("#location-section").addClass("is-flex");
+        budgetMath();
+        displayLocationCards();
     }else { 
         $("#budget-modal").addClass('is-active')
         }
@@ -362,11 +370,11 @@ $("#budget-modal-close").on('click', function(event){
     event.preventDefault();
 })
 
-$('#budget-input').on('click', 'button', function () {
-    $("#location-section").addClass("is-flex");
-    budgetMath();
-    displayLocationCards();
-})
+// $('#budget-input').on('click', 'button', function () {
+//     $("#location-section").addClass("is-flex");
+//     budgetMath();
+//     displayLocationCards();
+// })
 
 //too many request error modal button listener  for FlightAPI
 $('#requests-error-modal').on('click', 'button', function(){
