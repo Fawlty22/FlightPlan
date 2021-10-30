@@ -139,10 +139,12 @@ var convertedBudgetCard = function(entireBudget, foodNumber, activitiesNumber) {
     $("#budget-input").removeClass("is-flex");
     $("#budget-input").addClass("is-hidden");
 
-    $("#total-span").text(currencyData.currency_code + " " + entireBudget * currencyVariable);
-    $("#food-span").text(currencyData.currency_code + " " + foodNumber * currencyVariable);
-    $("#activity-span").text(currencyData.currency_code + " " + activitiesNumber * currencyVariable);
-    $("#flight-span").text("USD $" + budgetForFlight);
+    var totalBudget = entireBudget * currencyVariable;
+
+    $("#total-span").text(new Intl.NumberFormat('en-US', {style: 'currency', currency: currencyData.currency_code}).format(totalBudget));
+    $("#food-span").text(new Intl.NumberFormat('en-US', {style: 'currency', currency: currencyData.currency_code}).format(foodNumber * currencyVariable));
+    $("#activity-span").text(new Intl.NumberFormat('en-US', {style: 'currency', currency: currencyData.currency_code}).format(activitiesNumber * currencyVariable));
+    $("#flight-span").text("USD $" + (budgetForFlight).toFixed(2));
 
 }
 
