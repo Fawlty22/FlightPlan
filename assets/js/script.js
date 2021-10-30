@@ -305,7 +305,6 @@ $('#continueBtn').on('click', function () {
         desiredDestinationStorage();
         populateSearchHistory();
         displayBudgetCard();
-        callCurrAPI();
     }else { 
         if (!$('#input-bar').val()){
         $("#country-modal").addClass('is-active')
@@ -319,6 +318,7 @@ $('#submitBtn').on('click', function () {
     if($('#entire-budget-input').val() && $("#food-input").val() && $("#activities-input").val()){
         displayBudgetCard();
         callCurrAPI();
+        budgetMath();
     }else { 
         $("#budget-modal").addClass('is-active')
         }
@@ -361,7 +361,6 @@ $("#budget-modal-close").on('click', function(event){
 $('#budget-input').on('click', 'button', function () {
     $("#location-section").addClass("is-flex");
     displayLocationCards();
-    budgetMath();
 })
 
 //too many request error modal button listener  for FlightAPI
