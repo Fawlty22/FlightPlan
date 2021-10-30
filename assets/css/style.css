@@ -149,10 +149,13 @@ img {
         align-items: stretch;
         display: flex;
     }
+}
+
+/* Utility */
+.display-none {
+    display: none;
+}
 
     .navbar {
         min-height: 3.25rem;
     }
-
-
-}
