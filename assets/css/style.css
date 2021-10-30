@@ -25,6 +25,7 @@ main{
 
 .navbar-brand {
     display: flex;
+    align-items: center;
 }
 
 .brand-title{
@@ -112,6 +113,11 @@ img {
     display:flex;
 }
 
+.modal-card-foot {
+    display:flex;
+    justify-content: space-between;
+}
+
 @media screen and (min-width: 600px){
     .navbar-dropdown {
         background-color: var skyblue;
@@ -137,11 +143,6 @@ img {
     }
 }
 
-@media screen and (min-width: 768px){
-    .navbar {
-        min-height: 3.25rem;
-    }
-}
 
 @media screen and (min-width: 768px) {
     .navbar, .navbar-end, .navbar-menu, .navbar-start {
@@ -154,3 +155,7 @@ img {
 .display-none {
     display: none;
 }
+
+    .navbar {
+        min-height: 3.25rem;
+    }

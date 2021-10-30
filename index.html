@@ -19,7 +19,7 @@
     <div class="navbar-brand navbar-item">
 
       <a id="plane-container" class="navbar-item" href="#">
-        <img src="./assets/images/rocket-solid.svg" class="fas fa-rocket"></img>
+        <img src="./assets/images/rocket-solid.svg" class="fas fa-rocket is-48x48"></img>
       </a>
 
       <h1 id="brand-title" class="navbar-item title mb-0">Flight Roulette</h1>
@@ -111,6 +111,7 @@
             <h4 id = "total-budget">Total Budget: <span id = "total-span">1000</span></h4>
             <h4 id = "food-budget">Food Budget: <span id = "food-span">500</span></h4>
             <h4 id = "activity-budget">Activity Budget: <span id = "activity-span">200</span></h4>
+            <h4 id = "flight-budget">Flight Budget: <span id = "flight-span">200</span></h4>
           </div>
 
         </div>
@@ -140,50 +141,10 @@
           </div>
         </div>
       </div> -->
-      <!-- Card 2-->
-      <!-- <div class="card column m-1">
-        <div class="card-content">
-          <div class="media">
-            <div class="media-left">
-              <figure class="image is-48x48">
-                <img src="assets/images/number2.jpg">
-              </figure>
-            </div>
-            <div class="media-content">
-              <p class="title is-4">Location Name</p>
-            </div>
-          </div>
-
-          <div class="content">
-            <h4>Price of Flight:</h4>
-            <h4>Currency Conversion:</h4>
-
-          </div>
-        </div>
-      </div> -->
-      <!-- Card 3 -->
-      <!-- <div class="card column m-1">
-        <div class="card-content">
-          <div class="media">
-            <div class="media-left">
-              <figure class="image is-48x48">
-                <img src="assets/images/number3.jpg">
-              </figure>
-            </div>
-            <div class="media-content">
-              <p class="title is-4">Location Name</p>
-            </div>
-          </div>
-
-          <div class="content">
-            <h4>Price of Flight</h4>
-            <h4>Currency Conversion:</h4>
-
-          </div>
-        </div>
-      </div> -->
+      
     </section>
   </main>
+
 
   <!-- Modal Section-->
   <section id="modal-section">
@@ -213,12 +174,16 @@
         <section class="modal-card-body">
           <h5>A Note To The User:</h5>
         <ul>
-          <li>For those ok going to anywhere in the country of choice.</li>
+          <li>This app is intended for international travel only.</li>
           <li>Pricing is for the minimum flight price available for a round-trip.</li>
           <li>Flights are found from airport of origin, using 3-letter airport codes.</li>
         </ul>
         </section>
         <footer class="modal-card-foot">
+          <label class="checkbox">
+            <input id='start-checkbox' type="checkbox">
+            Don't show this message again.
+          </label>
           <button id ='close-button' class="button">Close</button>
         </footer>
       </div>
@@ -257,24 +222,43 @@
         </footer>
       </div>
     </div>
-  </section>
+  
 
-  <!-- 400 Error Modal ( Bad Request ) Flight API -->
-  <div id ='bad-request-error-modal' class="modal">
-    <div class="modal-background"></div>
-    <div class="modal-card">
-      <header class="modal-card-head">
-        <p class="modal-card-title">Error - Bad Request</p>
-        <button class="delete" aria-label="close"></button>
-      </header>
-      <section class="modal-card-body">
-        Oops! Something went wrong, please try again later.
-      </section>
-      <footer class="modal-card-foot">
-        <button class="button">Close</button>
-      </footer>
+    <!-- 400 Error Modal ( Bad Request ) Flight API -->
+    <div id ='bad-request-error-modal' class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Error - Bad Request</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          Oops! Something went wrong, please try again later.
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button">Close</button>
+        </footer>
+      </div>
     </div>
-  </div>
+
+    <!-- No Flights Modal Flight API -->
+    <div id='no-flights-modal' class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">There are no flights to this location.</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          Please try a different country.
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button">Close</button>
+        </footer>
+      </div>
+    </div>
+
+
 </section>
 
 
