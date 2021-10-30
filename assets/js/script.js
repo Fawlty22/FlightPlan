@@ -333,13 +333,8 @@ $('#continueBtn').on('click', function () {
         displayDesiredDestination();
         desiredDestinationStorage();
         populateSearchHistory();
-        displayBudgetCard();
     }else { 
-        if (!$('#input-bar').val()){
         $("#country-modal").addClass('is-active')
-        } else {(!$('#origin-bar').val()) 
-            $("#country-modal").addClass('is-active')
-        }
     };
 });
 
@@ -347,30 +342,10 @@ $('#submitBtn').on('click', function () {
     if($('#entire-budget-input').val() && $("#food-input").val() && $("#activities-input").val()){
         displayBudgetCard();
         callCurrAPI();
-        budgetMath();
     }else { 
         $("#budget-modal").addClass('is-active')
         }
 });
-
-// $('#continueBtn').on('click', function () {
-//     if($('#origin-bar').val()){
-//         displayDesiredDestination();
-//         desiredDestinationStorage();
-//         populateSearchHistory();
-//         displayBudgetCard();
-//         callCurrAPI();
-//     }else { 
-//     };
-// })$("#country-modal").addClass('is-active')
-
-// $('#submitBtn').on('click', function () {
-//     if($('#entire-budget-input').val()){
-//         displayBudgetCard();
-//         callCurrAPI();
-//     }else { $("#budget-modal").addClass('is-active')
-//     };
-// })
 
 $("#input-modal-close").on('click', function(event){
     $("#country-modal").removeClass('is-active');
