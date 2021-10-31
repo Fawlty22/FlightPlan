@@ -227,7 +227,6 @@ var createCards = function(dataFlight, dataCurr) {
         card.append(cardContent);
         //append card to page
         $('#location-section').append(card)
-       
     }
 }
 
