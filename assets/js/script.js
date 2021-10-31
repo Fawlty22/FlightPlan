@@ -3,7 +3,7 @@ var currencyVariable;
 var currencyData;
 
 //clear local storage when button is pressed
-var clearSearchHistory = function() {
+var clearSearchHistory = function () {
     localStorage.clear();
     searchHistory = [];
     $('#search-history-list').empty();
@@ -15,47 +15,47 @@ var displayBudgetCard = function () {
 
 var displayLocationCards = function (budgetNumbersObject) {
     $('#location-section').addClass('is-flex')
-    
+
     //Loop over cards in location-section and display none if flight price exceeds entireBudget
-    for (i=0; i<$('#location-section').children('div').length; i++) {
+    for (i = 0; i < $('#location-section').children('div').length; i++) {
         // get flight price from h4 element in card.
         var flightPrice = $($($($('#location-section').children('div')[i]).children('div')[0]).children('div')[1]).children('h4')[0].innerText.split('$')[1]
         // var budgetForFlight = entireBudget-foodNumber-activitiesNumber
-        if(flightPrice>budgetNumbersObject.flightPrice){
+        if (flightPrice > budgetNumbersObject.flightPrice) {
             $($('#location-section').children('div')[i]).addClass("display-none")
         }
     }
 }
 
 //changes span element to display the location that was searched for
-var displayDesiredDestination = function() {
+var displayDesiredDestination = function () {
     $("#destination-text").text("You are going to " + $('#input-bar').val().trim().charAt(0).toUpperCase() + $('#input-bar').val().trim().slice(1) + " from " + $('#origin-bar').val().trim().toUpperCase() + ".")
 }
 
 //pushes the location that was searched for to local storage with "search-history" key
-var desiredDestinationStorage = function() {
+var desiredDestinationStorage = function () {
     //Define array for searchHistory, populates from localStorage if localStorage contains "search-history, otherwise empty array"
     var searchHistory = JSON.parse(localStorage.getItem("search-history")) || [];
-    var historyEntry = {origin: $('#origin-bar').val().trim(), destination: $('#input-bar').val().trim()}
+    var historyEntry = { origin: $('#origin-bar').val().trim(), destination: $('#input-bar').val().trim() }
     searchHistory.push(historyEntry)
     localStorage.setItem("search-history", JSON.stringify(searchHistory));
     populateSearchHistory();
 }
 
 // first deletes all elements in the dropdown menu, then repopulates the dropdown menu from searchHistory array
-var populateSearchHistory = function(){
+var populateSearchHistory = function () {
     //declare searchHistory array and populate from search-history in local storage, otherwise empty array
     var searchHistory = JSON.parse(localStorage.getItem("search-history")) || [];
     $('#search-history-list').empty();
     //Loop through searchHistory array to create buttons for previously searched cities. Add event listeners to the buttons to trigger API calls and change searched text
-    for(var i=0; i<searchHistory.length; i++) {
+    for (var i = 0; i < searchHistory.length; i++) {
         const capitalizedOrigin = String(searchHistory[i].origin).toUpperCase();
         const capitalizedDestination = String(searchHistory[i].destination).charAt(0).toUpperCase() + String(searchHistory[i].destination).slice(1);
         //button for each searchHistory item, contains event listener on click 
         var searchedLocation = $('<button/>', {
             text: capitalizedOrigin + " to " + capitalizedDestination,
             class: "button is-info dropdown item",
-            click: function() {
+            click: function () {
                 $('#input-bar').val($(this).text().split(" to ")[1]);
                 $('#origin-bar').val($(this).text().split(" to ")[0]);
                 $("#destination-text").text("You are going from " + $(this).text() + ". Please select your travel dates and continue.")
@@ -66,7 +66,7 @@ var populateSearchHistory = function(){
     var historyClear = $('<button/>', {
         text: "Clear Search History",
         class: "button is-warning navbar-item",
-        click: function() {
+        click: function () {
             clearSearchHistory();
         }
     });
@@ -111,7 +111,7 @@ var convertToCurrencyVariable = function (dataCurr) {
 
 
 //convert user input country to country code for flight api call
-var convertToCountryCode = function(dataCurr){
+var convertToCountryCode = function (dataCurr) {
     var desiredLocation = $('#input-bar').val().trim();
     //for the sake of when things exist, here I am declaring a few variables to pass as arguments into flightAPIcall
     var originAirportCode = $('#origin-bar').val().trim().toUpperCase();
@@ -121,11 +121,11 @@ var convertToCountryCode = function(dataCurr){
 
 
 
-    for (i = 0; i < countryCodesArray.length; i++){
+    for (i = 0; i < countryCodesArray.length; i++) {
         if (countryCodesArray[i].name.toLowerCase().includes(desiredLocation.toLowerCase())) {
             var countryCode = countryCodesArray[i].code;
 
-            
+
             callFlightAPI(countryCode, dataCurr, originAirportCode, leaveDate, returnDate);
             break;
         }
@@ -133,7 +133,7 @@ var convertToCountryCode = function(dataCurr){
 }
 
 //makes card to display budget in converted currency
-var convertedBudgetCard = function(budgetNumbersObject) {
+var convertedBudgetCard = function (budgetNumbersObject) {
     $("#converted-budget").addClass("is-flex");
     $("#budget-input").removeClass("is-flex");
     $("#budget-input").addClass("is-hidden");
@@ -142,21 +142,21 @@ var convertedBudgetCard = function(budgetNumbersObject) {
 
     var totalBudget = budgetNumbersObject.entireBudget * currencyVariable;
 
-    $("#total-span").text(new Intl.NumberFormat('en-US', {style: 'currency', currency: currencyData.currency_code}).format(totalBudget));
-    $("#food-span").text(new Intl.NumberFormat('en-US', {style: 'currency', currency: currencyData.currency_code}).format(budgetNumbersObject.foodNumber * currencyVariable));
-    $("#activity-span").text(new Intl.NumberFormat('en-US', {style: 'currency', currency: currencyData.currency_code}).format(budgetNumbersObject.activitiesNumber * currencyVariable));
+    $("#total-span").text(new Intl.NumberFormat('en-US', { style: 'currency', currency: currencyData.currency_code }).format(totalBudget));
+    $("#food-span").text(new Intl.NumberFormat('en-US', { style: 'currency', currency: currencyData.currency_code }).format(budgetNumbersObject.foodNumber * currencyVariable));
+    $("#activity-span").text(new Intl.NumberFormat('en-US', { style: 'currency', currency: currencyData.currency_code }).format(budgetNumbersObject.activitiesNumber * currencyVariable));
     $("#flight-span").text("USD $" + (budgetNumbersObject.budgetForFlight).toFixed(2));
 
 }
 
 //budget math function
-var budgetMath = function() {
+var budgetMath = function () {
     entireBudget = Number($('#entire-budget-input').val());
     foodNumber = Number($('#food-input').val());
     activitiesNumber = Number($('#activities-input').val());
-    
+
     var budgetForFlight = Number(entireBudget - (foodNumber + activitiesNumber));
-    const budgetNumbersObject = {entireBudget: entireBudget, foodNumber: foodNumber, activitiesNumber: activitiesNumber, budgetForFlight: budgetForFlight};
+    const budgetNumbersObject = { entireBudget: entireBudget, foodNumber: foodNumber, activitiesNumber: activitiesNumber, budgetForFlight: budgetForFlight };
 
     displayLocationCards(budgetNumbersObject);
     convertedBudgetCard(budgetNumbersObject);
@@ -165,13 +165,13 @@ var budgetMath = function() {
 
 }
 
-var createCards = function(dataFlight, dataCurr) {
-    
-    for (i = 0; i < dataFlight.Quotes.length; i++){
+var createCards = function (dataFlight, dataCurr) {
+
+    for (i = 0; i < dataFlight.Quotes.length; i++) {
         var quoteID = dataFlight.Quotes[i].OutboundLeg.DestinationId
         //loop through the places array to convert destination ID into text
-        for (k = 0; k < dataFlight.Places.length; k++){
-            if (dataFlight.Places[k].PlaceId == quoteID){
+        for (k = 0; k < dataFlight.Places.length; k++) {
+            if (dataFlight.Places[k].PlaceId == quoteID) {
                 quoteID = dataFlight.Places[k].CityName;
             }
         }
@@ -179,9 +179,9 @@ var createCards = function(dataFlight, dataCurr) {
         //make the main card div
         var card = $('<div>').addClass('card column location-card is-one-third is-full-mobile mb-4');
         //make the card-content div
-        var cardContent = $('<div>') .addClass('card-content');
+        var cardContent = $('<div>').addClass('card-content');
         //make the media div
-        var mediaDiv =$('<div>') .addClass('media');
+        var mediaDiv = $('<div>').addClass('media');
         // make the media-left div
         var mediaLeftDiv = $('<div>').addClass('media-left');
         //make the figure element
@@ -200,7 +200,7 @@ var createCards = function(dataFlight, dataCurr) {
         var h4Carrier = $("<h4>").text("Carrier: " + dataFlight.Carriers[i].Name);
 
         // displays if the flight is Direct or not.
-        if(dataFlight.Quotes[i].Direct){
+        if (dataFlight.Quotes[i].Direct) {
             var h4DirFlight = $("<h4>").text("This Flight is direct.")
         } else {
             var h4DirFlight = $("<h4>").text("This Flight is NOT direct.")
@@ -231,7 +231,7 @@ var createCards = function(dataFlight, dataCurr) {
 
 //API Calls
 var callFlightAPI = function (countryCode, dataCurr, originAirportCode, leaveDate, returnDate) {
-    
+
     var destinationCountryCode = countryCode
     var originAirportCode = originAirportCode
     //url variables
@@ -246,41 +246,41 @@ var callFlightAPI = function (countryCode, dataCurr, originAirportCode, leaveDat
             "x-rapidapi-key": "66c69d12e4msh8b9325bed3418c9p1018dbjsn8cf4ae03c51f"
         }
     })
-    .then(function (response) {
-        if (response.ok) {
-            response.json().then(function (dataFlight) {
-                //if No Flights, Modal Shows
-                if (dataFlight.Quotes.length === 0) {
-                    $('#no-flights-modal').addClass('is-block')
-                }
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (dataFlight) {
+                    //if No Flights, Modal Shows
+                    if (dataFlight.Quotes.length === 0) {
+                        $('#no-flights-modal').addClass('is-block')
+                    }
 
-                console.log('dataFlight', dataFlight)
-                createCards(dataFlight, dataCurr);
-            })
-        }
-        else {                            
-            //404 Error 
-            if (response.status == 404) {
-                $('#not-found-error-modal').addClass('is-block')
-                
-                //429 Too Many Requests Error 
-            } else if (response.status == 429) {
-                $('#requests-error-modal').addClass('is-block')
-                
-                //Bad Request Error    
-            } else if (response.status == 400) {
-                $('#bad-request-error-modal').addClass('is-block')
-            }  
-        }
-        //clear input-bar
-    })
-    .then(function(){
-        $('#input-bar').val('')
-        $('#origin-bar').val('')
-    })
-    .catch(function(response){
-        console.error('error', response);
-    })
+                    console.log('dataFlight', dataFlight)
+                    createCards(dataFlight, dataCurr);
+                })
+            }
+            else {
+                //404 Error 
+                if (response.status == 404) {
+                    $('#not-found-error-modal').addClass('is-block')
+
+                    //429 Too Many Requests Error 
+                } else if (response.status == 429) {
+                    $('#requests-error-modal').addClass('is-block')
+
+                    //Bad Request Error    
+                } else if (response.status == 400) {
+                    $('#bad-request-error-modal').addClass('is-block')
+                }
+            }
+            //clear input-bar
+        })
+        .then(function () {
+            $('#input-bar').val('')
+            $('#origin-bar').val('')
+        })
+        .catch(function (response) {
+            console.error('error', response);
+        })
 }
 
 var callCurrAPI = function () {
@@ -297,8 +297,8 @@ var callCurrAPI = function () {
                 //404 Error 
                 if (response.status == 404) {
                     $('#not-found-error-modal').addClass('is-block')
-    
-                //Bad Request Error    
+
+                    //Bad Request Error    
                 } else if (response.status == 400) {
                     $('#bad-request-error-modal').addClass('is-block')
                 }
@@ -308,14 +308,14 @@ var callCurrAPI = function () {
 
 //check if the checkbox is checked...wait what? This is going to verify whether or not it's checked, and add 'visited' to localstorage
 var validateCheckbox = function () {
-    if (document.getElementById('start-checkbox').checked){
+    if (document.getElementById('start-checkbox').checked) {
         localStorage.setItem('FlightRouletteVisited', 'visited')
     }
-    
+
 }
 //if localstorage has 'FlightRouletteVisited', don't show initial modal
-var hideInitialModal = function() {
-    if (localStorage.getItem('FlightRouletteVisited')){
+var hideInitialModal = function () {
+    if (localStorage.getItem('FlightRouletteVisited')) {
         $('#starter-info').removeClass('is-active')
         $("#input-section").addClass("is-flex");
     }
@@ -334,49 +334,50 @@ $('#location-input').on('click', 'button', function () {
 $('#budget-input').on('click', 'button', function () {
     $("#location-section").addClass("is-flex");
     budgetMath();
+});
 
-// $('#location-input').on('click', 'button', function () {
-//     displayDesiredDestination();
-//     desiredDestinationStorage();
-//     populateSearchHistory();
-//     callCurrAPI();
-//     displayBudgetCard();
-// })
+    // $('#location-input').on('click', 'button', function () {
+    //     displayDesiredDestination();
+    //     desiredDestinationStorage();
+    //     populateSearchHistory();
+    //     callCurrAPI();
+    //     displayBudgetCard();
+    // })
 $('#continueBtn').on('click', function () {
-    if($('#input-bar').val() && $("#origin-bar").val() && $("#date-bar-return").val() && $("#date-bar-depart").val()){
+    if ($('#input-bar').val() && $("#origin-bar").val() && $("#date-bar-return").val() && $("#date-bar-depart").val()) {
         displayDesiredDestination();
         desiredDestinationStorage();
         populateSearchHistory();
         callCurrAPI();
         displayBudgetCard();
-    }else { 
+    } else {
         $("#country-modal").addClass('is-active')
     };
 });
 
 $('#submitBtn').on('click', function () {
-    if($('#entire-budget-input').val() && $("#food-input").val() && $("#activities-input").val()){
+    if ($('#entire-budget-input').val() && $("#food-input").val() && $("#activities-input").val()) {
         // displayBudgetCard();
         // callCurrAPI();
         $("#location-section").addClass("is-flex");
         budgetMath();
         displayLocationCards();
-    }else { 
+    } else {
         $("#budget-modal").addClass('is-active')
-        }
+    }
 });
 
-$("#input-modal-close").on('click', function(event){
+$("#input-modal-close").on('click', function (event) {
     $("#country-modal").removeClass('is-active');
     event.preventDefault();
 })
 
-$("#airport-modal-close").on('click', function(event){
+$("#airport-modal-close").on('click', function (event) {
     $("#airport-modal").removeClass('is-active');
     event.preventDefault();
 })
 
-$("#budget-modal-close").on('click', function(event){
+$("#budget-modal-close").on('click', function (event) {
     $("#budget-modal").removeClass('is-active');
     event.preventDefault();
 })
@@ -388,25 +389,25 @@ $("#budget-modal-close").on('click', function(event){
 // })
 
 //too many request error modal button listener  for FlightAPI
-$('#requests-error-modal').on('click', 'button', function(){
+$('#requests-error-modal').on('click', 'button', function () {
     $('#requests-error-modal').removeClass('is-block')
     location.reload();
 })
 
 //404 Error Modal for FlightAPI
-$('#not-found-error-modal').on('click', 'button', function(){
+$('#not-found-error-modal').on('click', 'button', function () {
     $('#not-found-error-modal').removeClass('is-block')
     location.reload();
 })
 
 // 400 Error for FlightAPI
-$('#bad-request-error-modal').on('click', 'button', function(){
+$('#bad-request-error-modal').on('click', 'button', function () {
     $('#bad-request-error-modal').removeClass('is-block')
     location.reload();
 })
 
 //no flights modal event listener
-$('#no-flights-modal').on('click', 'button', function(){
+$('#no-flights-modal').on('click', 'button', function () {
     $('#no-flights-modal').removeClass('is-block')
     location.reload();
 })
@@ -420,7 +421,7 @@ $("#close-button").on("click", function () {
     $("#input-section").addClass("is-flex");
 })
 
-$("#search-history-button").on("click", function() {
+$("#search-history-button").on("click", function () {
     $("#dropdown-target-display").toggle();
 })
 
