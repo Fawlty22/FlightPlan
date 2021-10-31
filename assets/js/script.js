@@ -35,7 +35,7 @@ var displayLocationCards = function () {
 
 //changes span element to display the location that was searched for
 var displayDesiredDestination = function() {
-    $("#destination-text").text("You are going to " + $('#input-bar').val().trim() + ".")
+    $("#destination-text").text("You are going to " + $('#input-bar').val().trim().charAt(0).toUpperCase() + $('#input-bar').val().trim().slice(1) + ".")
 }
 
 //pushes the location that was searched for to local storage with "search-history" key
