@@ -49,8 +49,8 @@ var populateSearchHistory = function(){
     $('#search-history-list').empty();
     //Loop through searchHistory array to create buttons for previously searched cities. Add event listeners to the buttons to trigger API calls and change searched text
     for(var i=0; i<searchHistory.length; i++) {
-        const capitalizedOrigin = searchHistory[i].origin.toUpperCase();
-        const capitalizedDestination = searchHistory[i].destination.charAt(0).toUpperCase() + searchHistory[i].destination.slice(1);
+        const capitalizedOrigin = String(searchHistory[i].origin).toUpperCase();
+        const capitalizedDestination = String(searchHistory[i].destination).charAt(0).toUpperCase() + String(searchHistory[i].destination).slice(1);
         //button for each searchHistory item, contains event listener on click 
         var searchedLocation = $('<button/>', {
             text: capitalizedOrigin + " to " + capitalizedDestination,
@@ -197,8 +197,6 @@ var createCards = function(dataFlight, dataCurr) {
         //make the content div 
         var contentDiv = $('<div>').addClass('content');
         //make the h4's that hold flight price
-        console.log(dataFlight.Carriers[i].Name)
-        console.log(dataFlight.Quotes[i].MinPrice)
         var h4Price = $('<h4>').text('Price of Flight: $' + dataFlight.Quotes[i].MinPrice);
         var h4Carrier = $("<h4>").text("Carrier: " + dataFlight.Carriers[i].Name);
 
@@ -208,8 +206,6 @@ var createCards = function(dataFlight, dataCurr) {
         } else {
             var h4DirFlight = $("<h4>").text("This Flight is NOT direct.")
         }
-
-
 
         //append h4's to contentDiv
         contentDiv.append(h4Price);
@@ -234,7 +230,6 @@ var createCards = function(dataFlight, dataCurr) {
        
     }
 }
-
 
 //API Calls
 var callFlightAPI = function (countryCode, dataCurr, originAirportCode, leaveDate, returnDate) {
