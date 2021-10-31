@@ -134,7 +134,7 @@ var convertToCountryCode = function(dataCurr){
 }
 
 //makes card to display budget in converted currency
-var convertedBudgetCard = function(entireBudget, foodNumber, activitiesNumber) {
+var convertedBudgetCard = function(entireBudget, foodNumber, activitiesNumber, budgetForFlight) {
     $("#converted-budget").addClass("is-flex");
     $("#budget-input").removeClass("is-flex");
     $("#budget-input").addClass("is-hidden");
@@ -178,7 +178,7 @@ var createCards = function(dataFlight, dataCurr) {
         //make the card-content div
         var cardContent = $('<div>') .addClass('card-content');
         //make the media div
-        var mediaDiv =$('<div>') .addClass('media');
+        var mediaDiv =$('<div>') .addClass('media is-flex is-justify-content-center');
         // make the media-left div
         var mediaLeftDiv = $('<div>').addClass('media-left');
         //make the figure element

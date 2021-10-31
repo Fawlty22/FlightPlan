@@ -1,6 +1,6 @@
 :root {
-    --bg-color: skyblue;
-    --card-bg-color: orange;
+    --bg-color: darkkhaki;
+    --card-bg-color: gray;
 
 }
 * {
@@ -19,8 +19,13 @@ main{
     background-color: var(--card-bg-color);
 }
 
+.title{
+    color: var(--bg-color);
+}
 .navbar {
     background-color: var(--bg-color);
+    display: flex;
+    justify-content: space-between;
 }
 
 .navbar-brand {
@@ -28,10 +33,9 @@ main{
     align-items: center;
 }
 
-.brand-title{
-    display: flex;
-    align-items: center;
-    width: 75%;
+#brand-title{
+    
+    color: black;
 }
 
 #plane-container {
@@ -72,9 +76,18 @@ main{
     display: none;
 }
 
+.conv-budget-item {
+    font-size: x-large;
+}
+
+#budget-holder {
+margin-top: 50px;
+}
+
 #budget-holder h4 {
     margin: 20px auto 30px 10px;
-    font-size: 20px;
+    font-size: 22px;
+    font-weight: bold;
 }
 
 #budget-input h3 {
