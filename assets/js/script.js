@@ -137,6 +137,8 @@ var convertedBudgetCard = function(budgetNumbersObject) {
     $("#converted-budget").addClass("is-flex");
     $("#budget-input").removeClass("is-flex");
     $("#budget-input").addClass("is-hidden");
+    var budgetForFlight = Number(entireBudget - (foodNumber + activitiesNumber));
+
 
     var totalBudget = budgetNumbersObject.entireBudget * currencyVariable;
 
@@ -333,7 +335,57 @@ $('#budget-input').on('click', 'button', function () {
     $("#location-section").addClass("is-flex");
     budgetMath();
 
+// $('#location-input').on('click', 'button', function () {
+//     displayDesiredDestination();
+//     desiredDestinationStorage();
+//     populateSearchHistory();
+//     callCurrAPI();
+//     displayBudgetCard();
+// })
+$('#continueBtn').on('click', function () {
+    if($('#input-bar').val() && $("#origin-bar").val() && $("#date-bar-return").val() && $("#date-bar-depart").val()){
+        displayDesiredDestination();
+        desiredDestinationStorage();
+        populateSearchHistory();
+        callCurrAPI();
+        displayBudgetCard();
+    }else { 
+        $("#country-modal").addClass('is-active')
+    };
+});
+
+$('#submitBtn').on('click', function () {
+    if($('#entire-budget-input').val() && $("#food-input").val() && $("#activities-input").val()){
+        // displayBudgetCard();
+        // callCurrAPI();
+        $("#location-section").addClass("is-flex");
+        budgetMath();
+        displayLocationCards();
+    }else { 
+        $("#budget-modal").addClass('is-active')
+        }
+});
+
+$("#input-modal-close").on('click', function(event){
+    $("#country-modal").removeClass('is-active');
+    event.preventDefault();
 })
+
+$("#airport-modal-close").on('click', function(event){
+    $("#airport-modal").removeClass('is-active');
+    event.preventDefault();
+})
+
+$("#budget-modal-close").on('click', function(event){
+    $("#budget-modal").removeClass('is-active');
+    event.preventDefault();
+})
+
+// $('#budget-input').on('click', 'button', function () {
+//     $("#location-section").addClass("is-flex");
+//     budgetMath();
+//     displayLocationCards();
+// })
 
 //too many request error modal button listener  for FlightAPI
 $('#requests-error-modal').on('click', 'button', function(){
