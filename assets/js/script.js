@@ -256,23 +256,22 @@ var callFlightAPI = function (countryCode, dataCurr, originAirportCode, leaveDat
                 createCards(dataFlight, dataCurr);
             })
         }
+        else {                            
+            //404 Error 
+            if (response.status == 404) {
+                $('#not-found-error-modal').addClass('is-block')
+                
+                //429 Too Many Requests Error 
+            } else if (response.status == 429) {
+                $('#requests-error-modal').addClass('is-block')
+                
+                //Bad Request Error    
+            } else if (response.status == 400) {
+                $('#bad-request-error-modal').addClass('is-block')
+            }  
+        }
+        //clear input-bar
     })
-    //     } else {                            // Error Handling
-    //         //404 Error 
-    //         if (response.status == 404) {
-    //             $('#not-found-error-modal').addClass('is-block')
-
-    //         //429 Too Many Requests Error 
-    //         } else if (response.status == 429) {
-    //             $('#requests-error-modal').addClass('is-block')
-
-    //         //Bad Request Error    
-    //         } else if (response.status == 400) {
-    //             $('#bad-request-error-modal').addClass('is-block')
-    //         }  
-    //     }
-    // })
-    //clear input-bar
     .then(function(){
         $('#input-bar').val('')
         $('#origin-bar').val('')
