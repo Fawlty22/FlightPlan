@@ -29,7 +29,7 @@ var displayLocationCards = function (budgetNumbersObject) {
 
 //changes span element to display the location that was searched for
 var displayDesiredDestination = function() {
-    $("#destination-text").text("You are going to " + $('#input-bar').val().trim().charAt(0).toUpperCase() + $('#input-bar').val().trim().slice(1) + ".")
+    $("#destination-text").text("You are going to " + $('#input-bar').val().trim().charAt(0).toUpperCase() + $('#input-bar').val().trim().slice(1) + " from " + $('#origin-bar').val().trim().toUpperCase() + ".")
 }
 
 //pushes the location that was searched for to local storage with "search-history" key
@@ -56,12 +56,9 @@ var populateSearchHistory = function(){
             text: capitalizedOrigin + " to " + capitalizedDestination,
             class: "button is-info dropdown item",
             click: function() {
-                console.log($(this).text())
-                $('#input-bar').val(destination);
-                displayDesiredDestination();
-                callCurrAPI();
-                displayBudgetCard();
-                $("#destination-text").text("You are going to " + $(this).text() + ".")
+                $('#input-bar').val($(this).text().split(" to ")[1]);
+                $('#origin-bar').val($(this).text().split(" to ")[0]);
+                $("#destination-text").text("You are going from " + $(this).text() + ". Please select your travel dates and continue.")
             }
         });
         $('#search-history-list').append(searchedLocation);

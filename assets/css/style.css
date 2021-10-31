@@ -108,6 +108,10 @@ img {
     justify-content: space-between;
 }
 
+#destination-text {
+    display: flex;
+}
+
 @media screen and (min-width: 600px){
     .navbar-dropdown {
         background-color: var skyblue;
