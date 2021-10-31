@@ -21,6 +21,7 @@ main{
 
 .navbar {
     background-color: var(--bg-color);
+    min-height: 3.25rem;
 }
 
 .navbar-brand {
@@ -87,16 +88,6 @@ main{
 
 }
 
-#location-input {
-/* display: flex;
-align-items: center;
-justify-content: center; */  
-}
-
-.location-card {
-    /* overflow-wrap: break-word; */
-}
-
 #location-input-container h3 {
     text-align: center;
 }
@@ -109,10 +100,6 @@ img {
     border-radius: 10px;
 }
 
-/* #locationInfo {
-    display: none;
- } */
-
 #date-container {
     display:flex;
 }
@@ -120,6 +107,23 @@ img {
 .modal-card-foot {
     display:flex;
     justify-content: space-between;
+}
+
+/* #destination-text {
+    display: block;
+}
+
+#static-destination-text {
+    display: block;
+} */
+
+/* Utility */
+.display-none {
+    display: none;
+}
+
+.display-block {
+    display: block;
 }
 
 @media screen and (min-width: 600px){
@@ -155,11 +159,4 @@ img {
     }
 }
 
-/* Utility */
-.display-none {
-    display: none;
-}
 
-    .navbar {
-        min-height: 3.25rem;
-    }
