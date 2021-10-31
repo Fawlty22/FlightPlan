@@ -278,6 +278,7 @@ var callFlightAPI = function (countryCode, dataCurr, originAirportCode, leaveDat
     //clear input-bar
     .then(function(){
         $('#input-bar').val('')
+        $('#origin-bar').val('')
     })
     .catch(function(response){
         console.error('error', response);
