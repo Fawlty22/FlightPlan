@@ -1,14 +1,8 @@
-var data = [];
-var entireBudget = 0;
-var foodNumber = 0;
-var activitiesNumber = 0;
-var searchHistory = JSON.parse(localStorage.getItem("search-history")) || [];
 const exchangeAPIKey = "10a0a9e87b4e3dfb6a11dfe5";
 var currencyVariable;
 var currencyData;
 
-
-
+//clear local storage when button is pressed
 var clearSearchHistory = function() {
     localStorage.clear();
     searchHistory = [];
@@ -19,15 +13,15 @@ var displayBudgetCard = function () {
     $('#budget-input').addClass('is-block')
 }
 
-var displayLocationCards = function () {
+var displayLocationCards = function (budgetNumbersObject) {
     $('#location-section').addClass('is-flex')
     
     //Loop over cards in location-section and display none if flight price exceeds entireBudget
     for (i=0; i<$('#location-section').children('div').length; i++) {
         // get flight price from h4 element in card.
         var flightPrice = $($($($('#location-section').children('div')[i]).children('div')[0]).children('div')[1]).children('h4')[0].innerText.split('$')[1]
-        var budgetForFlight = entireBudget-foodNumber-activitiesNumber
-        if(flightPrice>budgetForFlight){
+        // var budgetForFlight = entireBudget-foodNumber-activitiesNumber
+        if(flightPrice>budgetNumbersObject.flightPrice){
             $($('#location-section').children('div')[i]).addClass("display-none")
         }
     }
@@ -40,21 +34,29 @@ var displayDesiredDestination = function() {
 
 //pushes the location that was searched for to local storage with "search-history" key
 var desiredDestinationStorage = function() {
-    searchHistory.push($('#input-bar').val().trim());
+    //Define array for searchHistory, populates from localStorage if localStorage contains "search-history, otherwise empty array"
+    var searchHistory = JSON.parse(localStorage.getItem("search-history")) || [];
+    var historyEntry = {origin: $('#origin-bar').val().trim(), destination: $('#input-bar').val().trim()}
+    searchHistory.push(historyEntry)
     localStorage.setItem("search-history", JSON.stringify(searchHistory));
+    populateSearchHistory();
 }
 
 // first deletes all elements in the dropdown menu, then repopulates the dropdown menu from searchHistory array
 var populateSearchHistory = function(){
+    //declare searchHistory array and populate from search-history in local storage, otherwise empty array
+    var searchHistory = JSON.parse(localStorage.getItem("search-history")) || [];
     $('#search-history-list').empty();
     //Loop through searchHistory array to create buttons for previously searched cities. Add event listeners to the buttons to trigger API calls and change searched text
     for(var i=0; i<searchHistory.length; i++) {
-        const capitalizedDestination = searchHistory[i].charAt(0).toUpperCase() + searchHistory[i].slice(1);
+        const capitalizedOrigin = searchHistory[i].origin.toUpperCase();
+        const capitalizedDestination = searchHistory[i].destination.charAt(0).toUpperCase() + searchHistory[i].destination.slice(1);
+        //button for each searchHistory item, contains event listener on click 
         var searchedLocation = $('<button/>', {
-            text: capitalizedDestination,
+            text: capitalizedOrigin + " to " + capitalizedDestination,
             class: "button is-info dropdown item",
             click: function() {
-                const destination = $(this).text()
+                console.log($(this).text())
                 $('#input-bar').val(destination);
                 displayDesiredDestination();
                 callCurrAPI();
@@ -134,17 +136,17 @@ var convertToCountryCode = function(dataCurr){
 }
 
 //makes card to display budget in converted currency
-var convertedBudgetCard = function(entireBudget, foodNumber, activitiesNumber) {
+var convertedBudgetCard = function(budgetNumbersObject) {
     $("#converted-budget").addClass("is-flex");
     $("#budget-input").removeClass("is-flex");
     $("#budget-input").addClass("is-hidden");
 
-    var totalBudget = entireBudget * currencyVariable;
+    var totalBudget = budgetNumbersObject.entireBudget * currencyVariable;
 
     $("#total-span").text(new Intl.NumberFormat('en-US', {style: 'currency', currency: currencyData.currency_code}).format(totalBudget));
-    $("#food-span").text(new Intl.NumberFormat('en-US', {style: 'currency', currency: currencyData.currency_code}).format(foodNumber * currencyVariable));
-    $("#activity-span").text(new Intl.NumberFormat('en-US', {style: 'currency', currency: currencyData.currency_code}).format(activitiesNumber * currencyVariable));
-    $("#flight-span").text("USD $" + (budgetForFlight).toFixed(2));
+    $("#food-span").text(new Intl.NumberFormat('en-US', {style: 'currency', currency: currencyData.currency_code}).format(budgetNumbersObject.foodNumber * currencyVariable));
+    $("#activity-span").text(new Intl.NumberFormat('en-US', {style: 'currency', currency: currencyData.currency_code}).format(budgetNumbersObject.activitiesNumber * currencyVariable));
+    $("#flight-span").text("USD $" + (budgetNumbersObject.budgetForFlight).toFixed(2));
 
 }
 
@@ -155,14 +157,18 @@ var budgetMath = function() {
     activitiesNumber = Number($('#activities-input').val());
     
     var budgetForFlight = Number(entireBudget - (foodNumber + activitiesNumber));
+    const budgetNumbersObject = {entireBudget: entireBudget, foodNumber: foodNumber, activitiesNumber: activitiesNumber, budgetForFlight: budgetForFlight};
 
-    convertedBudgetCard(entireBudget, foodNumber, activitiesNumber, budgetForFlight);
+    displayLocationCards(budgetNumbersObject);
+    convertedBudgetCard(budgetNumbersObject);
 
     //$('#budget-text').text('Great! That leaves $' + budgetForFlight + ' for your flight.')
 
 }
 
 var createCards = function(dataFlight, dataCurr) {
+    console.log(dataFlight)
+    console.log(dataCurr)
     
     for (i = 0; i < dataFlight.Quotes.length; i++){
         var quoteID = dataFlight.Quotes[i].OutboundLeg.DestinationId
@@ -193,6 +199,8 @@ var createCards = function(dataFlight, dataCurr) {
         //make the content div 
         var contentDiv = $('<div>').addClass('content');
         //make the h4's that hold flight price
+        console.log(dataFlight.Carriers[i].Name)
+        console.log(dataFlight.Quotes[i].MinPrice)
         var h4Price = $('<h4>').text('Price of Flight: $' + dataFlight.Quotes[i].MinPrice);
         var h4Carrier = $("<h4>").text("Carrier: " + dataFlight.Carriers[i].Name);
 
@@ -257,23 +265,24 @@ var callFlightAPI = function (countryCode, dataCurr, originAirportCode, leaveDat
 
                 console.log('dataFlight', dataFlight)
                 createCards(dataFlight, dataCurr);
-            }
-            )
-        } else {                            // Error Handling
-            //404 Error 
-            if (response.status == 404) {
-                $('#not-found-error-modal').addClass('is-block')
-
-            //429 Too Many Requests Error 
-            } else if (response.status == 429) {
-                $('#requests-error-modal').addClass('is-block')
-
-            //Bad Request Error    
-            } else if (response.status == 400) {
-                $('#bad-request-error-modal').addClass('is-block')
-            }  
+            })
         }
     })
+    //     } else {                            // Error Handling
+    //         //404 Error 
+    //         if (response.status == 404) {
+    //             $('#not-found-error-modal').addClass('is-block')
+
+    //         //429 Too Many Requests Error 
+    //         } else if (response.status == 429) {
+    //             $('#requests-error-modal').addClass('is-block')
+
+    //         //Bad Request Error    
+    //         } else if (response.status == 400) {
+    //             $('#bad-request-error-modal').addClass('is-block')
+    //         }  
+    //     }
+    // })
     //clear input-bar
     .then(function(){
         $('#input-bar').val('')
@@ -327,7 +336,6 @@ var hideInitialModal = function() {
 $('#location-input').on('click', 'button', function () {
     displayDesiredDestination();
     desiredDestinationStorage();
-    populateSearchHistory();
     displayBudgetCard();
     callCurrAPI();
 })
@@ -335,7 +343,7 @@ $('#location-input').on('click', 'button', function () {
 $('#budget-input').on('click', 'button', function () {
     $("#location-section").addClass("is-flex");
     budgetMath();
-    displayLocationCards();
+
 })
 
 //too many request error modal button listener  for FlightAPI
