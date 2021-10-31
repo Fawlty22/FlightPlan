@@ -1,6 +1,7 @@
 :root {
-    --bg-color: darkkhaki;
-    --card-bg-color: gray;
+    --bg-color: #CFF4D2;
+    --card-bg-color: #2e9992;
+    
 
 }
 * {
@@ -10,20 +11,28 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+html{
+    background-color: #CFF4D2;
+}
 
 main{
     margin-top: 20px;
 }
+
 .card{
-    border: 1px solid black;
+    border: 1px solid #455054;
     background-color: var(--card-bg-color);
 }
 
 .title{
-    color: var(--bg-color);
+    color: #DDDDDA;
+    -webkit-text-stroke: #455054;
+    -webkit-text-stroke-width: thin;
+    font-size: 2.2rem;
 }
+
 .navbar {
-    background-color: var(--bg-color);
+    background-color: #769780;
     display: flex;
     justify-content: space-between;
 }
@@ -33,9 +42,14 @@ main{
     align-items: center;
 }
 
+#search-history-button{
+    border: 1px solid #455054;
+}
 #brand-title{
-    
-    color: black;
+    font-size: 3rem;
+    color: #455054;
+    -webkit-text-stroke: #DDDDDA;
+    -webkit-text-stroke-width: thin;
 }
 
 #plane-container {
@@ -80,6 +94,7 @@ main{
     font-size: x-large;
 }
 
+
 #budget-holder {
 margin-top: 50px;
 }
@@ -115,7 +130,13 @@ justify-content: center; */
 }
 
 .input, .button {
-    background-color: lightblue;
+    background-color: #DDDDDA;
+}
+
+.button.is-dark {
+    background-color: #455054;
+    border-color: #DDDDDA;
+    color: #DDDDDA;
 }
 
 img {
@@ -131,12 +152,16 @@ img {
     justify-content: space-between;
 }
 
+label{
+    font-size: 1.1rem;
+    font-weight: bold;
+}
 @media screen and (min-width: 600px){
     .navbar-dropdown {
-        background-color: var skyblue;
+        background-color: var #769780;
         border-bottom-left-radius: 6px;
         border-bottom-right-radius: 6px;
-        border-top: 2px solid #dbdbdb;
+        border-top: 2px solid #DDDDDA;
         box-shadow: 0 8px 8px rgb(10 10 10 / 10%);
         display: none;
         font-size: .875rem;
