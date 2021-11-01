@@ -326,26 +326,13 @@ var hideInitialModal = function () {
 
 
 //event listeners
-$('#location-input').on('click', 'button', function () {
-    displayDesiredDestination();
-    desiredDestinationStorage();
-    displayBudgetCard();
-    callCurrAPI();
-})
-
-$('#budget-input').on('click', 'button', function () {
-    $("#location-section").addClass("is-flex");
-    
-    // budgetMath();
-});
-
 
 $('#continueBtn').on('click', function () {
     if ($('#input-bar').val() && $("#origin-bar").val() && $("#date-bar-return").val() && $("#date-bar-depart").val()) {
         displayDesiredDestination();
         desiredDestinationStorage();
         populateSearchHistory();
-       
+        callCurrAPI();
         displayBudgetCard();
     } else {
         $("#country-modal").addClass('is-active')
