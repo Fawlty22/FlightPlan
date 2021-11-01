@@ -77,6 +77,10 @@ main{
     justify-content: space-around;
 }
 
+#starter-info li {
+    color: black;
+}
+
 .modal-content h5, li {
     color: var(--bg-color);
     margin: 0 auto;
