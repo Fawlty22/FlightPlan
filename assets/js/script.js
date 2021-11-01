@@ -181,7 +181,7 @@ var createCards = function (dataFlight, dataCurr) {
         //make the card-content div
         var cardContent = $('<div>').addClass('card-content');
         //make the media div
-        var mediaDiv = $('<div>').addClass('media');
+        var mediaDiv =$('<div>') .addClass('media is-flex is-justify-content-center');
         // make the media-left div
         var mediaLeftDiv = $('<div>').addClass('media-left');
         //make the figure element
@@ -330,6 +330,7 @@ $('#location-input').on('click', 'button', function () {
 
 $('#budget-input').on('click', 'button', function () {
     $("#location-section").addClass("is-flex");
+    
     // budgetMath();
 });
 
@@ -351,6 +352,7 @@ $('#submitBtn').on('click', function () {
        
         $("#location-section").addClass("is-flex");
         budgetMath();
+        
         
     } else {
         $("#budget-modal").addClass('is-active')

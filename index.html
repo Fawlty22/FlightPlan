@@ -8,8 +8,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css"
     integrity="sha512-IgmDkwzs96t4SrChW29No3NXBIBv8baW490zk5aXvhCD8vuZM3yUSkbyTBcXohkySecyzIrUwiF/qV0cuPcL3Q=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sonsie+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
-  <title>FlightRoulette</title> 
+  <title>FlightPlan</title> 
 </head>
 
 <body>
@@ -19,16 +22,16 @@
     <div class="navbar-brand navbar-item">
 
       <a id="plane-container" class="navbar-item" href="#">
-        <img src="./assets/images/rocket-solid.svg" class="fas fa-rocket is-48x48"></img>
+        <img src="./assets/images/airplane.svg" class=""></img>
       </a>
 
-      <h1 id="brand-title" class="navbar-item title mb-0">Flight Roulette</h1>
+      <h1 id="brand-title" class="navbar-item title mb-0">FlightPlan</h1>
     </div>
     <!-- <div class="navbar-item has-dropdown is-hoverable is-right m-6"> -->
       <!-- Search history link -->
       <!-- <a class="navbar-link navbar-item is-arrowless"> -->
         <!-- Search History -->
-      </a>
+      <!-- </a> -->
       <!-- Search history dropdown menu -->
       <!-- <div id="search-history-list" class="navbar-dropdown dropdown-content"> -->
         <!-- <button id="clear-search-history" class="navbar-item is-large"></button> -->
@@ -59,19 +62,19 @@
           <h3 class='title'>Where Would You Like To Go?</h3>
           
           <label for="origin-bar">Enter the three-letter airport code of your origin: </label>
-          <input id='origin-bar' class="input mb-5 is-success" type="text" placeholder="JFK, LAX, SLC, etc.">
+          <input id='origin-bar' class="input mb-5 is-dark" type="text" placeholder="JFK, LAX, SLC, etc.">
 
           <label for="input-bar">Which country would you like to travel to?</label>
-          <input id='input-bar' class="input mb-5 is-success" type="text" placeholder="Please choose an international vacation destination...">
+          <input id='input-bar' class="input mb-5 is-dark" type="text" placeholder="Please choose an international vacation destination...">
           
           <div id="date-container">
             <div>
               <label for="date-bar-depart">What day do you want to leave?</label>
-              <input id='date-bar-depart' class="input mb-5 is-success" type="date" placeholder="Date">
+              <input id='date-bar-depart' class="input mb-5 is-dark" type="date" placeholder="Date">
             </div> 
             <div>
               <label for="date-bar-return">When do you want to come back?</label>
-              <input id='date-bar-return' class="input mb-5 is-success" type="date" placeholder="Date">
+              <input id='date-bar-return' class="input mb-5 is-dark" type="date" placeholder="Date">
             </div>
           </div>
           <button id="continueBtn" class="button is-dark">Continue</button>
@@ -86,15 +89,15 @@
         <div id="budget-inputs-container">
 
           <label for="entire-budget-input">What's your entire budget?</label>
-          <input id='entire-budget-input' class="input mb-5 is-success" name='entire-budget' type="number"
+          <input id='entire-budget-input' class="input mb-5 is-dark" name='entire-budget' type="number"
             placeholder="Flight, food, activities and all...">
 
           <label for="food-input">How much do you plan to spend on food?</label>
-          <input id='food-input' class="input mb-5 is-success" name='food-budget' type="number"
+          <input id='food-input' class="input mb-5 is-dark" name='food-budget' type="number"
             placeholder="Ordering in, eating out, or cooking in your hotel...">
 
           <label for="activities-input">How much do you plan to spend on activities and experiences?</label>
-          <input id='activities-input' class="input mb-5 is-success" name='activities-budget' type="number"
+          <input id='activities-input' class="input mb-5 is-dark" name='activities-budget' type="number"
             placeholder="You can't bring it with you when you die...">
 
           <button id="submitBtn" class="button is-dark is-one-quarter">Submit</button>
@@ -107,7 +110,9 @@
       <!-- Converted Budget Display -->
       <div id = "converted-budget" class="card column is-half m-1">
         <div>
+          <div class="media">
           <h3 class = "title">Budget in Destination Currency: </h3>
+          </div>
           <div id = "budget-holder">
             <h4 id = "total-budget">Total Budget: <span id = "total-span"></span></h4>
             <h4 id = "food-budget">Food Budget: <span id = "food-span"></span></h4>

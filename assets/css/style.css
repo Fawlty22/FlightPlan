@@ -1,6 +1,7 @@
 :root {
-    --bg-color: skyblue;
-    --card-bg-color: orange;
+    --bg-color: #CFF4D2;
+    --card-bg-color: #2e9992;
+    
 
 }
 * {
@@ -8,48 +9,67 @@
     margin: 0;
     padding: 0;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
 }
 
+html{
+    background-color: #CFF4D2;
+    width: 100%;
+}
 
 main{
     margin-top: 20px;
 }
+
+
 .card{
     border: 1px solid black;
     background-color: var(--card-bg-color);
+    color: black;
+}
+
+.title{
+    color: white;
+    -webkit-text-stroke: black;
+    -webkit-text-stroke-width: thin;
+    font-size: 2.2rem;
 }
 
 .navbar {
-    background-color: var(--bg-color);
+    background-color: #769780;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .navbar-brand {
     display: flex;
     align-items: center;
+    height: 100%;
+    
 }
 
-.brand-title{
-    display: flex;
-    align-items: center;
-    width: 75%;
+#search-history-button{
+    border: 1px solid black;
+}
+#brand-title{
+    font-size: 3rem;
+    color: white;
+    -webkit-text-stroke: black;
+    -webkit-text-stroke-width: thin;
+    font-family: 'Sonsie One', cursive;
 }
 
 #plane-container {
     display: flex;
+    justify-content: center;
+    align-items: center;
     width: 25%;
-    height: 100%;
+    min-height: 100%;
     padding: 0px;
     margin-left: 12px;
 }
 
-.fa-rocket {
-    height: 85%;
-    width: 85%;
-    background-image: url("../../assets/images/rocket-solid.svg");
-    background-size:inherit;
-    background-position: center;
-    background-repeat: no-repeat;
-}
 
 #input-section {
     /* make sure to switch display to flex */
@@ -70,11 +90,25 @@ main{
 }
 #converted-budget {
     display: none;
+    color: black;
+}
+
+.conv-budget-item {
+    font-size: x-large;
+}
+
+.content h4 {
+    color: black;
+}
+
+#budget-holder {
+margin-top: 50px;
 }
 
 #budget-holder h4 {
     margin: 20px auto 30px 10px;
-    font-size: 20px;
+    font-size: 22px;
+    font-weight: bold;
 }
 
 #budget-input h3 {
@@ -92,11 +126,19 @@ main{
 }
 
 .input, .button {
-    background-color: lightblue;
+    background-color: white;
+}
+
+.button.is-dark {
+    background-color: black;
+    border-color: white;
+    color: white;
 }
 
 img {
-    border-radius: 10px;
+    min-height: 100%;
+    min-width: 100%;
+    object-fit: cover;
 }
 
 /* #locationInfo {
@@ -112,16 +154,21 @@ img {
     justify-content: space-between;
 }
 
-#destination-text {
-    display: flex;
+label{
+    font-size: 1.1rem;
+    font-weight: bold;
 }
 
+.navbar-item img {
+    max-height: 5rem;
+
+}
 @media screen and (min-width: 600px){
     .navbar-dropdown {
-        background-color: var skyblue;
+        background-color: var #769780;
         border-bottom-left-radius: 6px;
         border-bottom-right-radius: 6px;
-        border-top: 2px solid #dbdbdb;
+        border-top: 2px solid white;
         box-shadow: 0 8px 8px rgb(10 10 10 / 10%);
         display: none;
         font-size: .875rem;
