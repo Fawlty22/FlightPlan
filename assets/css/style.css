@@ -70,6 +70,9 @@ main{
     margin-left: 12px;
 }
 
+#dest-wrap {
+    margin-top: 10px;
+}
 
 #input-section {
     /* make sure to switch display to flex */
