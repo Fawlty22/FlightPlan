@@ -15,13 +15,13 @@ var displayBudgetCard = function () {
 
 var displayLocationCards = function (budgetNumbersObject) {
     $('#location-section').addClass('is-flex')
-
+    console.log('object', budgetNumbersObject)
     //Loop over cards in location-section and display none if flight price exceeds entireBudget
     for (i = 0; i < $('#location-section').children('div').length; i++) {
         // get flight price from h4 element in card.
         var flightPrice = $($($($('#location-section').children('div')[i]).children('div')[0]).children('div')[1]).children('h4')[0].innerText.split('$')[1]
         // var budgetForFlight = entireBudget-foodNumber-activitiesNumber
-        if (flightPrice > budgetNumbersObject.flightPrice) {
+        if (flightPrice > budgetNumbersObject.budgetForFlight) {
             $($('#location-section').children('div')[i]).addClass("display-none")
         }
     }
@@ -156,7 +156,7 @@ var budgetMath = function () {
     activitiesNumber = Number($('#activities-input').val());
 
     var budgetForFlight = Number(entireBudget - (foodNumber + activitiesNumber));
-    const budgetNumbersObject = { entireBudget: entireBudget, foodNumber: foodNumber, activitiesNumber: activitiesNumber, budgetForFlight: budgetForFlight };
+    var budgetNumbersObject = { entireBudget: entireBudget, foodNumber: foodNumber, activitiesNumber: activitiesNumber, budgetForFlight: budgetForFlight };
 
     displayLocationCards(budgetNumbersObject);
     convertedBudgetCard(budgetNumbersObject);
@@ -186,9 +186,6 @@ var createCards = function (dataFlight, dataCurr) {
         var mediaLeftDiv = $('<div>').addClass('media-left');
         //make the figure element
         var figure = $('<figure>').addClass('image is-48x48');
-        //make the img element and append to figure
-        // var image = $('<img>').attr('src', `./assets/images/number${i}.jpg`)
-        // figure.append(image)
         //make the media content div
         var mediaContent = $('<div>').addClass('media-content');
         //make the title using quoteID which is the city name of destination airport
@@ -333,22 +330,16 @@ $('#location-input').on('click', 'button', function () {
 
 $('#budget-input').on('click', 'button', function () {
     $("#location-section").addClass("is-flex");
-    budgetMath();
+    // budgetMath();
 });
 
-    // $('#location-input').on('click', 'button', function () {
-    //     displayDesiredDestination();
-    //     desiredDestinationStorage();
-    //     populateSearchHistory();
-    //     callCurrAPI();
-    //     displayBudgetCard();
-    // })
+
 $('#continueBtn').on('click', function () {
     if ($('#input-bar').val() && $("#origin-bar").val() && $("#date-bar-return").val() && $("#date-bar-depart").val()) {
         displayDesiredDestination();
         desiredDestinationStorage();
         populateSearchHistory();
-        callCurrAPI();
+       
         displayBudgetCard();
     } else {
         $("#country-modal").addClass('is-active')
@@ -357,11 +348,10 @@ $('#continueBtn').on('click', function () {
 
 $('#submitBtn').on('click', function () {
     if ($('#entire-budget-input').val() && $("#food-input").val() && $("#activities-input").val()) {
-        // displayBudgetCard();
-        // callCurrAPI();
+       
         $("#location-section").addClass("is-flex");
         budgetMath();
-        displayLocationCards();
+        
     } else {
         $("#budget-modal").addClass('is-active')
     }
@@ -382,11 +372,6 @@ $("#budget-modal-close").on('click', function (event) {
     event.preventDefault();
 })
 
-// $('#budget-input').on('click', 'button', function () {
-//     $("#location-section").addClass("is-flex");
-//     budgetMath();
-//     displayLocationCards();
-// })
 
 //too many request error modal button listener  for FlightAPI
 $('#requests-error-modal').on('click', 'button', function () {
