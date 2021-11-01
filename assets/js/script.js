@@ -1,4 +1,4 @@
-const exchangeAPIKey = "10a0a9e87b4e3dfb6a11dfe5";
+const exchangeAPIKey = "f2253dc0204a69967da8012e";
 var currencyVariable;
 var currencyData;
 
@@ -326,6 +326,18 @@ var hideInitialModal = function () {
 
 
 //event listeners
+// $('#location-input').on('click', 'button', function () {
+//     displayDesiredDestination();
+//     desiredDestinationStorage();
+//     displayBudgetCard();
+//     callCurrAPI();
+// })
+
+// $('#budget-input').on('click', 'button', function () {
+//     $("#location-section").addClass("is-flex");
+
+//     // budgetMath();
+// });
 
 $('#continueBtn').on('click', function () {
     if ($('#input-bar').val() && $("#origin-bar").val() && $("#date-bar-return").val() && $("#date-bar-depart").val()) {
