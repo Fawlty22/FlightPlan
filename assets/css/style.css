@@ -115,16 +115,6 @@ margin-top: 50px;
 
 }
 
-#location-input {
-/* display: flex;
-align-items: center;
-justify-content: center; */  
-}
-
-.location-card {
-    /* overflow-wrap: break-word; */
-}
-
 #location-input-container h3 {
     text-align: center;
 }
@@ -145,6 +135,10 @@ img {
     object-fit: cover;
 }
 
+/* #locationInfo {
+    display: none;
+ } */
+
 #date-container {
     display:flex;
 }
@@ -154,6 +148,7 @@ img {
     justify-content: space-between;
 }
 
+<<<<<<< HEAD
 label{
     font-size: 1.1rem;
     font-weight: bold;
@@ -163,6 +158,12 @@ label{
     max-height: 5rem;
 
 }
+=======
+#destination-text {
+    display: flex;
+}
+
+>>>>>>> c1bfb4d737c00126b21faae63115e12879a61d91
 @media screen and (min-width: 600px){
     .navbar-dropdown {
         background-color: var #769780;

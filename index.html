@@ -52,7 +52,6 @@
         </div>
       </div>
     </div>
-
   </nav>
 
   <main>
@@ -78,10 +77,11 @@
               <input id='date-bar-return' class="input mb-5 is-dark" type="date" placeholder="Date">
             </div>
           </div>
-          <button class="button is-dark">Continue</button>
+          <button id="continueBtn" class="button is-dark">Continue</button>
           <span id="destination-text"></span>
         </div>
       </div>
+    
       <!-- Budget Input Card-->
       <div id='budget-input' class="card column is-half m-1">
         <h3 class='title'>How Much You Got?</h3>
@@ -100,11 +100,12 @@
           <input id='activities-input' class="input mb-5 is-dark" name='activities-budget' type="number"
             placeholder="You can't bring it with you when you die...">
 
-          <button class="button is-dark is-one-quarter">Submit</button>
+          <button id="submitBtn" class="button is-dark is-one-quarter">Submit</button>
           <span id="budget-text"></span>
         </div>
 
       </div>
+      
 
       <!-- Converted Budget Display -->
       <div id = "converted-budget" class="card column is-half m-1">
@@ -113,10 +114,10 @@
           <h3 class = "title">Budget in Destination Currency: </h3>
           </div>
           <div id = "budget-holder">
-            <h4 id = "total-budget">Total Budget: <span id = "total-span">1000</span></h4>
-            <h4 id = "food-budget">Food Budget: <span id = "food-span">500</span></h4>
-            <h4 id = "activity-budget">Activity Budget: <span id = "activity-span">200</span></h4>
-            <h4 id = "flight-budget">Flight Budget: <span id = "flight-span">200</span></h4>
+            <h4 id = "total-budget">Total Budget: <span id = "total-span"></span></h4>
+            <h4 id = "food-budget">Food Budget: <span id = "food-span"></span></h4>
+            <h4 id = "activity-budget">Activity Budget: <span id = "activity-span"></span></h4>
+            <h4 id = "flight-budget">Flight Budget: <span id = "flight-span"></span></h4>
           </div>
 
         </div>
@@ -146,10 +147,8 @@
           </div>
         </div>
       </div> -->
-      
     </section>
   </main>
-
 
   <!-- Modal Section-->
   <section id="modal-section">
@@ -266,6 +265,38 @@
 
 </section>
 
+<!-- Flight Input Modals (not entering all inputs) -->
+<div id ='country-modal' class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Missing or Incorrect Information</p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      Oops! It looks like there is missing or incorrect information. Please make sure all information is filled in and correct.
+    </section>
+    <footer class="modal-card-foot">
+      <button id="input-modal-close" class="button">Close</button>
+    </footer>
+  </div>
+</div>
+
+<div id ='budget-modal' class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Missing Information</p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      Oops! It looks like there is missing information. Please make sure all information is filled in.
+    </section>
+    <footer class="modal-card-foot">
+      <button id="budget-modal-close" class="button">Close</button>
+    </footer>
+  </div>
+</div>
 
 
 
