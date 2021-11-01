@@ -9,10 +9,12 @@
     margin: 0;
     padding: 0;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
 }
 
 html{
     background-color: #CFF4D2;
+    width: 100%;
 }
 
 main{
@@ -20,13 +22,13 @@ main{
 }
 
 .card{
-    border: 1px solid #455054;
+    border: 1px solid black;
     background-color: var(--card-bg-color);
 }
 
 .title{
-    color: #DDDDDA;
-    -webkit-text-stroke: #455054;
+    color: white;
+    -webkit-text-stroke: black;
     -webkit-text-stroke-width: thin;
     font-size: 2.2rem;
 }
@@ -35,39 +37,37 @@ main{
     background-color: #769780;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .navbar-brand {
     display: flex;
     align-items: center;
+    height: 100%;
+    
 }
 
 #search-history-button{
-    border: 1px solid #455054;
+    border: 1px solid black;
 }
 #brand-title{
     font-size: 3rem;
-    color: #455054;
-    -webkit-text-stroke: #DDDDDA;
+    color: white;
+    -webkit-text-stroke: black;
     -webkit-text-stroke-width: thin;
+    font-family: 'Sonsie One', cursive;
 }
 
 #plane-container {
     display: flex;
+    justify-content: center;
+    align-items: center;
     width: 25%;
-    height: 100%;
+    min-height: 100%;
     padding: 0px;
     margin-left: 12px;
 }
 
-.fa-rocket {
-    height: 85%;
-    width: 85%;
-    background-image: url("../../assets/images/rocket-solid.svg");
-    background-size:inherit;
-    background-position: center;
-    background-repeat: no-repeat;
-}
 
 #input-section {
     /* make sure to switch display to flex */
@@ -130,17 +130,19 @@ justify-content: center; */
 }
 
 .input, .button {
-    background-color: #DDDDDA;
+    background-color: white;
 }
 
 .button.is-dark {
-    background-color: #455054;
-    border-color: #DDDDDA;
-    color: #DDDDDA;
+    background-color: black;
+    border-color: white;
+    color: white;
 }
 
 img {
-    border-radius: 10px;
+    min-height: 100%;
+    min-width: 100%;
+    object-fit: cover;
 }
 
 #date-container {
@@ -156,12 +158,17 @@ label{
     font-size: 1.1rem;
     font-weight: bold;
 }
+
+.navbar-item img {
+    max-height: 5rem;
+
+}
 @media screen and (min-width: 600px){
     .navbar-dropdown {
         background-color: var #769780;
         border-bottom-left-radius: 6px;
         border-bottom-right-radius: 6px;
-        border-top: 2px solid #DDDDDA;
+        border-top: 2px solid white;
         box-shadow: 0 8px 8px rgb(10 10 10 / 10%);
         display: none;
         font-size: .875rem;
