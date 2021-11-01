@@ -190,7 +190,7 @@ var createCards = function (dataFlight, dataCurr) {
         // make the media-left div
         var mediaLeftDiv = $('<div>').addClass('media-left');
         //make the figure element
-        var figure = $('<figure>').addClass('image is-48x48');
+        // var figure = $('<figure>').addClass('image is-48x48');
         //make the media content div
         var mediaContent = $('<div>').addClass('media-content');
         //make the title using quoteID which is the city name of destination airport
@@ -215,7 +215,7 @@ var createCards = function (dataFlight, dataCurr) {
         //append image to figure
         // figure.append(image);
         //append figure to mediaLeftDiv
-        mediaLeftDiv.append(figure);
+        // mediaLeftDiv.append(figure);
         //append p to mediaContent
         mediaContent.append(title);
         //append mediacontent and medialeft to mediaDiv
