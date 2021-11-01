@@ -167,7 +167,7 @@ var budgetMath = function () {
 
 var createCards = function (dataFlight, dataCurr) {
 
-    for (i = 0; i < dataFlight.Quotes.length; i++) {
+    for (i = 0; i < dataFlight.Carriers.length; i++) {
         var quoteID = dataFlight.Quotes[i].OutboundLeg.DestinationId
         //loop through the places array to convert destination ID into text
         for (k = 0; k < dataFlight.Places.length; k++) {
