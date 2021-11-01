@@ -148,10 +148,6 @@ img {
     object-fit: cover;
 }
 
-/* #locationInfo {
-    display: none;
- } */
-
 #date-container {
     display:flex;
 }
