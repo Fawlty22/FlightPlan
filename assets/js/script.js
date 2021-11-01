@@ -36,10 +36,15 @@ var displayDesiredDestination = function () {
 var desiredDestinationStorage = function () {
     //Define array for searchHistory, populates from localStorage if localStorage contains "search-history, otherwise empty array"
     var searchHistory = JSON.parse(localStorage.getItem("search-history")) || [];
-    var historyEntry = { origin: $('#origin-bar').val().trim(), destination: $('#input-bar').val().trim() }
-    searchHistory.push(historyEntry)
-    localStorage.setItem("search-history", JSON.stringify(searchHistory));
-    populateSearchHistory();
+    if($('#origin-bar').val()!=='' && $('#input-bar').val()!=='') {
+        var historyEntry = { origin: $('#origin-bar').val().trim(), destination: $('#input-bar').val().trim() }
+        searchHistory.push(historyEntry)
+        localStorage.setItem("search-history", JSON.stringify(searchHistory));
+        populateSearchHistory();
+    }
+    else {
+        populateSearchHistory();
+    }
 }
 
 // first deletes all elements in the dropdown menu, then repopulates the dropdown menu from searchHistory array

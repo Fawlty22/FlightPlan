@@ -5,6 +5,7 @@
         "localstorage",
         "mediacontent",
         "medialeft",
+        "preconnect",
         "referrerpolicy"
     ]
 }
