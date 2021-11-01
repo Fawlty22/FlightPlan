@@ -87,16 +87,6 @@ main{
 
 }
 
-#location-input {
-/* display: flex;
-align-items: center;
-justify-content: center; */  
-}
-
-.location-card {
-    /* overflow-wrap: break-word; */
-}
-
 #location-input-container h3 {
     text-align: center;
 }
@@ -120,6 +110,10 @@ img {
 .modal-card-foot {
     display:flex;
     justify-content: space-between;
+}
+
+#destination-text {
+    display: flex;
 }
 
 @media screen and (min-width: 600px){
