@@ -1,5 +1,8 @@
 # FlightRoulette
 
+## IMPORTANT NOTE
+This project is no longer functional.  The API it relies on has since been shutdown. Before that though, this app could take in desired destinations and budgets, and return flight options as well as a converted budget into the currency of the desired destination. 
+
 ## User Story
 
 AS A user that likes to travel on a budget
